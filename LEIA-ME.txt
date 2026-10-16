@@ -1,0 +1,18 @@
+Arquivos de ícone do webapp — versão com mulher negra e cabelo cacheado
+
+Arquivos:
+- icon-192.png: ícone 192x192 para Android/PWA
+- icon-512.png: ícone 512x512 para Android/PWA
+- apple-touch-icon.png: ícone 180x180 para iPhone/iPad
+- favicon-32.png: favicon 32x32
+- manifest.json: configuração inicial do webapp
+- LEIA-ME.txt: instruções de integração
+
+Coloque os arquivos na mesma pasta do index.html no repositório GitHub Pages.
+Adicione dentro do <head> do index.html:
+<link rel="icon" type="image/png" sizes="32x32" href="./favicon-32.png">
+<link rel="apple-touch-icon" href="./apple-touch-icon.png">
+<link rel="manifest" href="./manifest.json">
+<meta name="theme-color" content="#121212">
+
+O GitHub Pages oferece HTTPS, necessário/recomendado para instalação confiável do webapp.
