@@ -1,0 +1,880 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Plano de Treino & Saúde - Esposa</title>
+    <style>
+        :root {
+            --bg-color: #121212;
+            --card-bg: #1e1e1e;
+            --text-color: #e0e0e0;
+            --text-muted: #aaaaaa;
+            --accent-color: #ff6b81;
+            --accent-gradient: linear-gradient(135deg, #ff6b81, #ff4757);
+            --border-color: #2c2c2c;
+            --success-color: #2ed573;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+        }
+
+        body {
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            padding: 16px;
+            max-width: 600px;
+            margin: 0 auto;
+            padding-bottom: 40px;
+        }
+
+        header {
+            text-align: center;
+            margin-bottom: 16px;
+        }
+
+        header h1 {
+            font-size: 1.3rem;
+            color: #fff;
+            margin-bottom: 4px;
+        }
+
+        header p {
+            font-size: 0.85rem;
+            color: var(--text-muted);
+        }
+
+        /* Tabs de Navegação */
+        .tabs {
+            display: flex;
+            gap: 6px;
+            overflow-x: auto;
+            padding-bottom: 8px;
+            margin-bottom: 16px;
+            scrollbar-width: none;
+        }
+
+        .tabs::-webkit-scrollbar {
+            display: none;
+        }
+
+        .tab-btn {
+            background: var(--card-bg);
+            border: 1px solid var(--border-color);
+            color: var(--text-muted);
+            padding: 8px 12px;
+            border-radius: 12px;
+            font-size: 0.8rem;
+            font-weight: 600;
+            white-space: nowrap;
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+
+        .tab-btn.active {
+            background: var(--accent-gradient);
+            color: white;
+            border-color: transparent;
+            box-shadow: 0 4px 12px rgba(255, 107, 129, 0.3);
+        }
+
+        /* Conteúdo das Abas */
+        .tab-content {
+            display: none;
+        }
+
+        .tab-content.active {
+            display: block;
+        }
+
+        .card {
+            background: var(--card-bg);
+            border: 1px solid var(--border-color);
+            border-radius: 14px;
+            padding: 16px;
+            margin-bottom: 12px;
+        }
+
+        .card h3 {
+            font-size: 0.95rem;
+            color: #fff;
+            margin-bottom: 8px;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        .card p, .card li {
+            font-size: 0.85rem;
+            color: var(--text-muted);
+            line-height: 1.5;
+        }
+
+        ul {
+            padding-left: 18px;
+        }
+
+        /* Exercícios */
+        .exercise-item {
+            background: var(--card-bg);
+            border: 1px solid var(--border-color);
+            border-radius: 12px;
+            padding: 12px 14px;
+            margin-bottom: 10px;
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+        }
+
+        .exercise-header {
+            display: flex;
+            align-items: flex-start;
+            gap: 10px;
+        }
+
+        .exercise-header input[type="checkbox"] {
+            width: 20px;
+            height: 20px;
+            accent-color: #ff6b81;
+            margin-top: 2px;
+            cursor: pointer;
+        }
+
+        .exercise-title {
+            font-size: 0.9rem;
+            color: #fff;
+            font-weight: 600;
+        }
+
+        .exercise-details {
+            font-size: 0.8rem;
+            color: var(--accent-color);
+            font-weight: 500;
+        }
+
+        .exercise-footer {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-top: 1px solid var(--border-color);
+            padding-top: 8px;
+            margin-top: 4px;
+        }
+
+        .exercise-footer label {
+            font-size: 0.8rem;
+            color: var(--text-muted);
+        }
+
+        .exercise-footer input[type="text"] {
+            background: #121212;
+            border: 1px solid var(--border-color);
+            color: white;
+            padding: 4px 8px;
+            border-radius: 6px;
+            width: 90px;
+            text-align: center;
+            font-size: 0.8rem;
+        }
+
+        .completed {
+            opacity: 0.5;
+            text-decoration: line-through;
+        }
+
+        /* Formulário de Medidas */
+        .measure-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 10px;
+            margin-bottom: 12px;
+        }
+
+        .measure-field {
+            display: flex;
+            flex-direction: column;
+            gap: 4px;
+        }
+
+        .measure-field label {
+            font-size: 0.8rem;
+            color: var(--text-muted);
+        }
+
+        .measure-field input {
+            background: #121212;
+            border: 1px solid var(--border-color);
+            color: white;
+            padding: 8px;
+            border-radius: 8px;
+            font-size: 0.85rem;
+        }
+
+        .btn-action {
+            width: 100%;
+            background: var(--accent-gradient);
+            color: white;
+            border: none;
+            padding: 10px;
+            border-radius: 10px;
+            font-weight: bold;
+            font-size: 0.85rem;
+            cursor: pointer;
+            margin-top: 6px;
+        }
+
+        .history-list {
+            margin-top: 12px;
+            max-height: 200px;
+            overflow-y: auto;
+        }
+
+        .history-item {
+            background: #121212;
+            border: 1px solid var(--border-color);
+            padding: 8px 12px;
+            border-radius: 8px;
+            margin-bottom: 6px;
+            font-size: 0.8rem;
+            display: flex;
+            justify-content: space-between;
+        }
+
+        /* Timer */
+        .timer-box {
+            text-align: center;
+            padding: 20px 0;
+        }
+
+        .timer-display {
+            font-size: 2.5rem;
+            font-weight: bold;
+            color: var(--accent-color);
+            margin-bottom: 12px;
+        }
+
+        .timer-btn-group {
+            display: flex;
+            justify-content: center;
+            gap: 10px;
+        }
+
+        .timer-btn {
+            background: var(--card-bg);
+            border: 1px solid var(--border-color);
+            color: white;
+            padding: 8px 16px;
+            border-radius: 8px;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <h1>Plano de Treino & Saúde</h1>
+        <p>Foco: Glúteos, Cintura Fina & Bem-Estar</p>
+    </header>
+
+    <!-- Navegação por Abas -->
+    <div class="tabs">
+        <button class="tab-btn active" onclick="switchTab(event, 'visao-geral')">Visão Geral</button>
+        <button class="tab-btn" onclick="switchTab(event, 'treino-a')">Treino A (Seg)</button>
+        <button class="tab-btn" onclick="switchTab(event, 'treino-b')">Treino B (Qua)</button>
+        <button class="tab-btn" onclick="switchTab(event, 'treino-c')">Treino C (Sex)</button>
+        <button class="tab-btn" onclick="switchTab(event, 'medidas')">📏 Medidas</button>
+        <button class="tab-btn" onclick="switchTab(event, 'alimentacao')">🥗 Dieta</button>
+        <button class="tab-btn" onclick="switchTab(event, 'receitas')">🍳 Receitas</button>
+        <button class="tab-btn" onclick="switchTab(event, 'timer')">⏱️ Timer</button>
+    </div>
+
+    <!-- ABA: VISÃO GERAL -->
+    <div id="visao-geral" class="tab-content active">
+        <div class="card">
+            <h3>📅 Cronograma Semanal</h3>
+            <p>• <strong>Segunda:</strong> Treino A (Glúteos, Posteriores e Abdômen) + Cárdio</p>
+            <p>• <strong>Terça:</strong> Caminhada leve em dupla (Descanso ativo) 🚶‍♀️🚶‍♂️</p>
+            <p>• <strong>Quarta:</strong> Treino B (Quadríceps, Bumbum e Tônus Superior) + Cárdio</p>
+            <p>• <strong>Quinta:</strong> Caminhada leve em dupla (Descanso ativo) 🚶‍♀️🚶‍♂️</p>
+            <p>• <strong>Sexta:</strong> Treino C (Glúteos, Coxas e Core) + Cárdio</p>
+        </div>
+        <div class="card">
+            <h3>💡 Regras de Ouro</h3>
+            <ul>
+                <li><strong>Descanso:</strong> 45 a 60 segundos entre as séries (use a aba Timer!).</li>
+                <li><strong>Postura:</strong> Respeite a biomecânica das máquinas.</li>
+                <li><strong>Água:</strong> Mantenha uma garrafinha de 500ml sempre ao seu lado.</li>
+                <li><strong>Cárdio:</strong> 25 a 30 minutos na esteira inclinada ou transport ao final.</li>
+            </ul>
+        </div>
+    </div>
+
+    <!-- ABA: TREINO A -->
+    <div id="treino-a" class="tab-content">
+        <div class="card" style="background: #251a1d; border-color: #ff6b81;">
+            <h3>Segunda-feira: Glúteos, Posteriores e Abdômen</h3>
+        </div>
+
+        <div class="exercise-item">
+            <div class="exercise-header">
+                <input type="checkbox" onchange="toggleCheck(this)">
+                <div>
+                    <div class="exercise-title">Aquecimento (Esteira ou Bike)</div>
+                    <div class="exercise-details">5 a 10 min | Ritmo leve</div>
+                </div>
+            </div>
+            <div class="exercise-footer">
+                <label>Obs:</label>
+                <input type="text" placeholder="Leve" oninput="saveState()">
+            </div>
+        </div>
+
+        <div class="exercise-item">
+            <div class="exercise-header">
+                <input type="checkbox" onchange="toggleCheck(this)">
+                <div>
+                    <div class="exercise-title">Cadeira Abdutora</div>
+                    <div class="exercise-details">4 séries x 15 repetições</div>
+                </div>
+            </div>
+            <div class="exercise-footer">
+                <label>Carga (kg):</label>
+                <input type="text" placeholder="0 kg" oninput="saveState()">
+            </div>
+        </div>
+
+        <div class="exercise-item">
+            <div class="exercise-header">
+                <input type="checkbox" onchange="toggleCheck(this)">
+                <div>
+                    <div class="exercise-title">Leg Press Horizontal (ou 45°)</div>
+                    <div class="exercise-details">4 séries x 12 repetições</div>
+                </div>
+            </div>
+            <div class="exercise-footer">
+                <label>Carga (kg):</label>
+                <input type="text" placeholder="0 kg" oninput="saveState()">
+            </div>
+        </div>
+
+        <div class="exercise-item">
+            <div class="exercise-header">
+                <input type="checkbox" onchange="toggleCheck(this)">
+                <div>
+                    <div class="exercise-title">Cadeira Flexora</div>
+                    <div class="exercise-details">4 séries x 12 repetições</div>
+                </div>
+            </div>
+            <div class="exercise-footer">
+                <label>Carga (kg):</label>
+                <input type="text" placeholder="0 kg" oninput="saveState()">
+            </div>
+        </div>
+
+        <div class="exercise-item">
+            <div class="exercise-header">
+                <input type="checkbox" onchange="toggleCheck(this)">
+                <div>
+                    <div class="exercise-title">Elevação Pélvica na Máquina / Smith</div>
+                    <div class="exercise-details">4 séries x 12 repetições</div>
+                </div>
+            </div>
+            <div class="exercise-footer">
+                <label>Carga (kg):</label>
+                <input type="text" placeholder="0 kg" oninput="saveState()">
+            </div>
+        </div>
+
+        <div class="exercise-item">
+            <div class="exercise-header">
+                <input type="checkbox" onchange="toggleCheck(this)">
+                <div>
+                    <div class="exercise-title">Puxada Alta Aberta na Polia</div>
+                    <div class="exercise-details">3 séries x 12 repetições</div>
+                </div>
+            </div>
+            <div class="exercise-footer">
+                <label>Carga (kg):</label>
+                <input type="text" placeholder="0 kg" oninput="saveState()">
+            </div>
+        </div>
+
+        <div class="exercise-item">
+            <div class="exercise-header">
+                <input type="checkbox" onchange="toggleCheck(this)">
+                <div>
+                    <div class="exercise-title">Abdominal Máquina / Colchonete</div>
+                    <div class="exercise-details">3 séries x 15 repetições</div>
+                </div>
+            </div>
+            <div class="exercise-footer">
+                <label>Obs:</label>
+                <input type="text" placeholder="Sem peso" oninput="saveState()">
+            </div>
+        </div>
+
+        <div class="exercise-item">
+            <div class="exercise-header">
+                <input type="checkbox" onchange="toggleCheck(this)">
+                <div>
+                    <div class="exercise-title">Cárdio Final (Esteira Inclinada / Transport)</div>
+                    <div class="exercise-details">25 a 30 minutos</div>
+                </div>
+            </div>
+            <div class="exercise-footer">
+                <label>Velocidade:</label>
+                <input type="text" placeholder="5.5 km/h" oninput="saveState()">
+            </div>
+        </div>
+    </div>
+
+    <!-- ABA: TREINO B -->
+    <div id="treino-b" class="tab-content">
+        <div class="card" style="background: #251a1d; border-color: #ff6b81;">
+            <h3>Quarta-feira: Quadríceps, Bumbum e Tônus Superior</h3>
+        </div>
+
+        <div class="exercise-item">
+            <div class="exercise-header">
+                <input type="checkbox" onchange="toggleCheck(this)">
+                <div>
+                    <div class="exercise-title">Aquecimento (Transport ou Bike)</div>
+                    <div class="exercise-details">5 a 10 min | Ritmo leve</div>
+                </div>
+            </div>
+            <div class="exercise-footer">
+                <label>Obs:</label>
+                <input type="text" placeholder="Leve" oninput="saveState()">
+            </div>
+        </div>
+
+        <div class="exercise-item">
+            <div class="exercise-header">
+                <input type="checkbox" onchange="toggleCheck(this)">
+                <div>
+                    <div class="exercise-title">Cadeira Extensora</div>
+                    <div class="exercise-details">4 séries x 12 repetições</div>
+                </div>
+            </div>
+            <div class="exercise-footer">
+                <label>Carga (kg):</label>
+                <input type="text" placeholder="0 kg" oninput="saveState()">
+            </div>
+        </div>
+
+        <div class="exercise-item">
+            <div class="exercise-header">
+                <input type="checkbox" onchange="toggleCheck(this)">
+                <div>
+                    <div class="exercise-title">Agachamento no Smith / Hack Machine</div>
+                    <div class="exercise-details">4 séries x 10 repetições</div>
+                </div>
+            </div>
+            <div class="exercise-footer">
+                <label>Carga (kg):</label>
+                <input type="text" placeholder="0 kg" oninput="saveState()">
+            </div>
+        </div>
+
+        <div class="exercise-item">
+            <div class="exercise-header">
+                <input type="checkbox" onchange="toggleCheck(this)">
+                <div>
+                    <div class="exercise-title">Glúteo na Polia (Caneleira / Alça)</div>
+                    <div class="exercise-details">4 séries x 12 repetições (por perna)</div>
+                </div>
+            </div>
+            <div class="exercise-footer">
+                <label>Carga (kg):</label>
+                <input type="text" placeholder="0 kg" oninput="saveState()">
+            </div>
+        </div>
+
+        <div class="exercise-item">
+            <div class="exercise-header">
+                <input type="checkbox" onchange="toggleCheck(this)">
+                <div>
+                    <div class="exercise-title">Elevação Lateral de Ombros (Halteres Leves)</div>
+                    <div class="exercise-details">3 séries x 12 repetições</div>
+                </div>
+            </div>
+            <div class="exercise-footer">
+                <label>Carga (kg):</label>
+                <input type="text" placeholder="2 kg" oninput="saveState()">
+            </div>
+        </div>
+
+        <div class="exercise-item">
+            <div class="exercise-header">
+                <input type="checkbox" onchange="toggleCheck(this)">
+                <div>
+                    <div class="exercise-title">Tríceps Corda na Polia</div>
+                    <div class="exercise-details">3 séries x 12 repetições</div>
+                </div>
+            </div>
+            <div class="exercise-footer">
+                <label>Carga (kg):</label>
+                <input type="text" placeholder="0 kg" oninput="saveState()">
+            </div>
+        </div>
+
+        <div class="exercise-item">
+            <div class="exercise-header">
+                <input type="checkbox" onchange="toggleCheck(this)">
+                <div>
+                    <div class="exercise-title">Prancha Abdominal</div>
+                    <div class="exercise-details">3 séries x 30 a 45 segundos</div>
+                </div>
+            </div>
+            <div class="exercise-footer">
+                <label>Tempo:</label>
+                <input type="text" placeholder="30s" oninput="saveState()">
+            </div>
+        </div>
+
+        <div class="exercise-item">
+            <div class="exercise-header">
+                <input type="checkbox" onchange="toggleCheck(this)">
+                <div>
+                    <div class="exercise-title">Cárdio Final (Esteira ou Bike)</div>
+                    <div class="exercise-details">25 a 30 minutos</div>
+                </div>
+            </div>
+            <div class="exercise-footer">
+                <label>Velocidade:</label>
+                <input type="text" placeholder="5.5 km/h" oninput="saveState()">
+            </div>
+        </div>
+    </div>
+
+    <!-- ABA: TREINO C -->
+    <div id="treino-c" class="tab-content">
+        <div class="card" style="background: #251a1d; border-color: #ff6b81;">
+            <h3>Sexta-feira: Glúteos, Coxas e Core</h3>
+        </div>
+
+        <div class="exercise-item">
+            <div class="exercise-header">
+                <input type="checkbox" onchange="toggleCheck(this)">
+                <div>
+                    <div class="exercise-title">Aquecimento (Esteira)</div>
+                    <div class="exercise-details">5 a 10 min | Ritmo leve</div>
+                </div>
+            </div>
+            <div class="exercise-footer">
+                <label>Obs:</label>
+                <input type="text" placeholder="Leve" oninput="saveState()">
+            </div>
+        </div>
+
+        <div class="exercise-item">
+            <div class="exercise-header">
+                <input type="checkbox" onchange="toggleCheck(this)">
+                <div>
+                    <div class="exercise-title">Leg Press Horizontal (Pés altos e abertos)</div>
+                    <div class="exercise-details">4 séries x 12 repetições</div>
+                </div>
+            </div>
+            <div class="exercise-footer">
+                <label>Carga (kg):</label>
+                <input type="text" placeholder="0 kg" oninput="saveState()">
+            </div>
+        </div>
+
+        <div class="exercise-item">
+            <div class="exercise-header">
+                <input type="checkbox" onchange="toggleCheck(this)">
+                <div>
+                    <div class="exercise-title">Cadeira Abdutora (Tronco inclinado para frente)</div>
+                    <div class="exercise-details">4 séries x 15 repetições</div>
+                </div>
+            </div>
+            <div class="exercise-footer">
+                <label>Carga (kg):</label>
+                <input type="text" placeholder="0 kg" oninput="saveState()">
+            </div>
+        </div>
+
+        <div class="exercise-item">
+            <div class="exercise-header">
+                <input type="checkbox" onchange="toggleCheck(this)">
+                <div>
+                    <div class="exercise-title">Cadeira Flexora</div>
+                    <div class="exercise-details">3 séries x 12 repetições</div>
+                </div>
+            </div>
+            <div class="exercise-footer">
+                <label>Carga (kg):</label>
+                <input type="text" placeholder="0 kg" oninput="saveState()">
+            </div>
+        </div>
+
+        <div class="exercise-item">
+            <div class="exercise-header">
+                <input type="checkbox" onchange="toggleCheck(this)">
+                <div>
+                    <div class="exercise-title">Remada Baixa na Polia</div>
+                    <div class="exercise-details">3 séries x 12 repetições</div>
+                </div>
+            </div>
+            <div class="exercise-footer">
+                <label>Carga (kg):</label>
+                <input type="text" placeholder="0 kg" oninput="saveState()">
+            </div>
+        </div>
+
+        <div class="exercise-item">
+            <div class="exercise-header">
+                <input type="checkbox" onchange="toggleCheck(this)">
+                <div>
+                    <div class="exercise-title">Abdominal Infra / Supra</div>
+                    <div class="exercise-details">3 séries x 15 repetições</div>
+                </div>
+            </div>
+            <div class="exercise-footer">
+                <label>Obs:</label>
+                <input type="text" placeholder="Sem peso" oninput="saveState()">
+            </div>
+        </div>
+
+        <div class="exercise-item">
+            <div class="exercise-header">
+                <input type="checkbox" onchange="toggleCheck(this)">
+                <div>
+                    <div class="exercise-title">Cárdio Final (Esteira ou Transport)</div>
+                    <div class="exercise-details">25 a 30 minutos</div>
+                </div>
+            </div>
+            <div class="exercise-footer">
+                <label>Velocidade:</label>
+                <input type="text" placeholder="5.5 km/h" oninput="saveState()">
+            </div>
+        </div>
+    </div>
+
+    <!-- ABA: MEDIDAS -->
+    <div id="medidas" class="tab-content">
+        <div class="card">
+            <h3>📏 Registro de Medidas & Peso</h3>
+            <p style="margin-bottom: 12px;">Acompanhe sua evolução periodicamente (ex: a cada 15 dias).</p>
+
+            <div class="measure-grid">
+                <div class="measure-field">
+                    <label>Peso (kg):</label>
+                    <input type="number" id="m-peso" step="0.1" placeholder="Ex: 60.5">
+                </div>
+                <div class="measure-field">
+                    <label>Cintura (cm):</label>
+                    <input type="number" id="m-cintura" step="0.5" placeholder="Ex: 68">
+                </div>
+                <div class="measure-field">
+                    <label>Quadril / Bumbum (cm):</label>
+                    <input type="number" id="m-quadril" step="0.5" placeholder="Ex: 98">
+                </div>
+                <div class="measure-field">
+                    <label>Coxa (cm):</label>
+                    <input type="number" id="m-coxa" step="0.5" placeholder="Ex: 55">
+                </div>
+            </div>
+
+            <button class="btn-action" onclick="addMeasurement()">Salvar Registro</button>
+        </div>
+
+        <div class="card">
+            <h3>📊 Histórico de Progresso</h3>
+            <div id="history-container" class="history-list">
+                <!-- Preenchido via JavaScript -->
+            </div>
+        </div>
+    </div>
+
+    <!-- ABA: DIETA -->
+    <div id="alimentacao" class="tab-content">
+        <div class="card">
+            <h3>🥗 Dicas Nutricionais para Cintura Fina & Glúteo</h3>
+            <br>
+            <ul>
+                <li><strong>Proteínas em todas as refeições:</strong> Frango, ovos, peixe, carne magra, queijo cotagge ou whey. Ajudam a construir o bumbum e manter a saciedade.</li>
+                <li><strong>Hidratação Constante:</strong> Beba de 2,5 a 3 litros de água por dia. Diminui o inchaço e a retenção de líquidos na barriga.</li>
+                <li><strong>Coma Fibras:</strong> Aveia, vegetais verdes e sementes melhoram o funcionamento do intestino e diminuem a distensão abdominal.</li>
+                <li><strong>Evite Açúcares e Refrigerantes:</strong> São os maiores causadores de acúmulo de gordura localizada na cintura.</li>
+            </ul>
+        </div>
+    </div>
+
+    <!-- ABA: RECEITAS FIT -->
+    <div id="receitas" class="tab-content">
+        <div class="card">
+            <h3>🍳 Crepioca Proteica</h3>
+            <p><strong>Ingredientes:</strong> 1 ovo, 1 colher (sopa) de goma de tapioca, 1 colher (sopa) de requeijão light ou frango desfiado.</p>
+            <p><strong>Preparo:</strong> Misture tudo, despeje na frigideira antiaderente e doure os dois lados.</p>
+        </div>
+
+        <div class="card">
+            <h3>🥞 Panqueca Doce de Aveia & Banana</h3>
+            <p><strong>Ingredientes:</strong> 1 banana amassada, 1 ovo, 2 colheres (sopa) de farelo de aveia e canela a gosto.</p>
+            <p><strong>Preparo:</strong> Misture bem os ingredientes e leve à frigideira em fogo baixo. Fica incrível!</p>
+        </div>
+
+        <div class="card">
+            <h3>🥑 Mousse Fit de Proteína</h3>
+            <p><strong>Ingredientes:</strong> 1 iogurte natural desnatado + 1 scoop de whey protein (ou 2 colheres de leite em pó desnatado) + morangos picados.</p>
+            <p><strong>Preparo:</strong> Misture o iogurte com a proteína até ficar homogêneo e sirva com os morangos.</p>
+        </div>
+    </div>
+
+    <!-- ABA: TIMER -->
+    <div id="timer" class="tab-content">
+        <div class="card timer-box">
+            <h3>⏱️ Temporizador de Descanso</h3>
+            <div class="timer-display" id="timer-display">00:45</div>
+            <div class="timer-btn-group">
+                <button class="timer-btn" onclick="setTimer(45)">45 seg</button>
+                <button class="timer-btn" onclick="setTimer(60)">60 seg</button>
+                <button class="timer-btn" style="background: #ff4757;" onclick="stopTimer()">Parar</button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Alternar Abas
+        function switchTab(evt, tabName) {
+            const contents = document.getElementsByClassName("tab-content");
+            for (let c of contents) {
+                c.classList.remove("active");
+            }
+
+            const buttons = document.getElementsByClassName("tab-btn");
+            for (let b of buttons) {
+                b.classList.remove("active");
+            }
+
+            document.getElementById(tabName).classList.add("active");
+            evt.currentTarget.classList.add("active");
+            window.scrollTo(0, 0);
+        }
+
+        // Marcar Exercício
+        function toggleCheck(checkbox) {
+            const item = checkbox.closest('.exercise-item');
+            if (checkbox.checked) {
+                item.classList.add("completed");
+            } else {
+                item.classList.remove("completed");
+            }
+            saveState();
+        }
+
+        // Salvar Treino
+        function saveState() {
+            const data = {};
+            document.querySelectorAll('.exercise-item').forEach((item, index) => {
+                const checkbox = item.querySelector('input[type="checkbox"]');
+                const textInput = item.querySelector('input[type="text"]');
+                data[index] = {
+                    checked: checkbox.checked,
+                    text: textInput.value
+                };
+            });
+            localStorage.setItem('treino_esposa_v2_data', JSON.stringify(data));
+        }
+
+        // Medidas
+        function addMeasurement() {
+            const peso = document.getElementById('m-peso').value;
+            const cintura = document.getElementById('m-cintura').value;
+            const quadril = document.getElementById('m-quadril').value;
+            const coxa = document.getElementById('m-coxa').value;
+
+            if (!peso && !cintura && !quadril && !coxa) {
+                alert("Preencha pelo menos um campo!");
+                return;
+            }
+
+            const date = new Date().toLocaleDateString('pt-BR');
+            const history = JSON.parse(localStorage.getItem('treino_esposa_history') || '[]');
+
+            history.unshift({ date, peso, cintura, quadril, coxa });
+            localStorage.setItem('treino_esposa_history', JSON.stringify(history));
+
+            document.getElementById('m-peso').value = '';
+            document.getElementById('m-cintura').value = '';
+            document.getElementById('m-quadril').value = '';
+            document.getElementById('m-coxa').value = '';
+
+            renderHistory();
+        }
+
+        function renderHistory() {
+            const history = JSON.parse(localStorage.getItem('treino_esposa_history') || '[]');
+            const container = document.getElementById('history-container');
+            container.innerHTML = '';
+
+            if (history.length === 0) {
+                container.innerHTML = '<p style="font-size: 0.8rem;">Nenhum registro salvo ainda.</p>';
+                return;
+            }
+
+            history.forEach(item => {
+                const div = document.createElement('div');
+                div.className = 'history-item';
+                div.innerHTML = `
+                    <span><strong>${item.date}:</strong> ${item.peso ? item.peso + 'kg' : ''}</span>
+                    <span>Cint: ${item.cintura || '-'}cm | Quad: ${item.quadril || '-'}cm</span>
+                `;
+                container.appendChild(div);
+            });
+        }
+
+        // Timer
+        let timerInterval;
+        function setTimer(seconds) {
+            clearInterval(timerInterval);
+            let timeLeft = seconds;
+            updateTimerDisplay(timeLeft);
+
+            timerInterval = setInterval(() => {
+                timeLeft--;
+                updateTimerDisplay(timeLeft);
+                if (timeLeft <= 0) {
+                    clearInterval(timerInterval);
+                    alert("⏱️ Tempo de descanso finalizado! Bora para a próxima série!");
+                }
+            }, 1000);
+        }
+
+        function stopTimer() {
+            clearInterval(timerInterval);
+            updateTimerDisplay(0);
+        }
+
+        function updateTimerDisplay(sec) {
+            const m = Math.floor(sec / 60).toString().padStart(2, '0');
+            const s = (sec % 60).toString().padStart(2, '0');
+            document.getElementById('timer-display').innerText = `${m}:${s}`;
+        }
+
+        // Carregar Dados
+        window.onload = function() {
+            const saved = localStorage.getItem('treino_esposa_v2_data');
+            if (saved) {
+                const data = JSON.parse(saved);
+                document.querySelectorAll('.exercise-item').forEach((item, index) => {
+                    if (data[index]) {
+                        const checkbox = item.querySelector('input[type="checkbox"]');
+                        const textInput = item.querySelector('input[type="text"]');
+                        checkbox.checked = data[index].checked;
+                        if (checkbox.checked) item.classList.add("completed");
+                        textInput.value = data[index].text || '';
+                    }
+                });
+            }
+            renderHistory();
+        }
+    </script>
+</body>
+</html>
