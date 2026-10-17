@@ -62,17 +62,25 @@
         }
 
         /* Tabs de Navegação */
+        
         .tabs {
             display: flex;
+            flex-wrap: wrap; /* Permite que os botões quebrem linha no PC se não couberem */
             gap: 6px;
-            overflow-x: auto;
+            justify-content: center; /* Centraliza os botões na tela do PC */
             padding-bottom: 8px;
             margin-bottom: 16px;
-            scrollbar-width: none;
+            overflow-x: auto;
+            scrollbar-width: thin;
         }
 
         .tabs::-webkit-scrollbar {
-            display: none;
+            height: 6px;
+        }
+
+        .tabs::-webkit-scrollbar-thumb {
+            background: var(--border-color);
+            border-radius: 3px;
         }
 
         .tab-btn {
