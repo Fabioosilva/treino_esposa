@@ -431,215 +431,221 @@
     </div>
 
     <!-- ABA: TREINO A -->
-<div id="treino-a" class="tab-content">
-    <div class="card" style="background: #251a1d; border-color: #ff6b81;">
-        <h3>Segunda-feira: Glúteos, Posteriores e Abdômen</h3>
-    </div>
+    <div id="treino-a" class="tab-content">
+        <div class="card" style="background: #251a1d; border-color: #ff6b81;">
+            <h3>Segunda-feira: Glúteos, Posteriores e Abdômen</h3>
+        </div>
 
-    <!-- Aquecimento (Sem timer de série) -->
-    <div class="exercise-item">
-        <div class="exercise-header">
-            <input type="checkbox" class="exercise-check" onchange="toggleCheck(this)">
-            <div>
-                <div class="exercise-title">Aquecimento (Esteira ou Bike)</div>
-                <div class="exercise-details">5 a 10 min | Ritmo leve</div>
+        <!-- Aquecimento (Sem timer de série) -->
+        <div class="exercise-item">
+            <div class="exercise-header">
+                <input type="checkbox" class="exercise-check" onchange="toggleCheck(this)">
+                <div>
+                    <div class="exercise-title">Aquecimento (Esteira ou Bike)</div>
+                    <div class="exercise-details">5 a 10 min | Ritmo leve</div>
+                </div>
+            </div>
+            <div class="exercise-footer">
+                <label>Obs:</label>
+                <input type="text" placeholder="Leve" oninput="saveState()">
             </div>
         </div>
-        <div class="exercise-footer">
-            <label>Obs:</label>
-            <input type="text" placeholder="Leve" oninput="saveState()">
-        </div>
-    </div>
 
-    <!-- Cadeira Abdutora (4 séries) -->
-    <div class="exercise-item" data-total-series="4">
-        <div class="exercise-header">
-            <input type="checkbox" class="exercise-check" onchange="toggleCheck(this)">
-            <div>
-                <div class="exercise-title">Cadeira Abdutora</div>
-                <div class="exercise-details">4 séries x 15 repetições</div>
-                <a href="https://www.youtube.com/results?search_query=cadeira+abdutora+execucao+correta"
-                    target="_blank" class="btn-exec">▶ Ver Execução</a>
+        <!-- Cadeira Abdutora (4 séries) -->
+        <div class="exercise-item" data-total-series="4">
+            <div class="exercise-header">
+                <input type="checkbox" class="exercise-check" onchange="toggleCheck(this)">
+                <div>
+                    <div class="exercise-title">Cadeira Abdutora</div>
+                    <div class="exercise-details">4 séries x 15 repetições</div>
+                    <a href="https://www.youtube.com/results?search_query=cadeira+abdutora+execucao+correta"
+                        target="_blank" class="btn-exec">▶ Ver Execução</a>
+                </div>
+            </div>
+            <div class="timer-container">
+                <div style="display: flex; justify-content: space-between; align-items: center;">
+                    <span class="series-badge">Série: <span class="current-series">0</span>/4</span>
+                    <span class="timer-display">00:00</span>
+                </div>
+                <div class="timer-controls">
+                    <button type="button" class="btn-time active" onclick="selectTime(this, 30)">30s</button>
+                    <button type="button" class="btn-time" onclick="selectTime(this, 45)">45s</button>
+                    <button type="button" class="btn-time" onclick="selectTime(this, 60)">60s</button>
+                    <button type="button" class="btn-start-timer" onclick="startExerciseTimer(this, 4)">⏱ Iniciar
+                        Descanso</button>
+                </div>
+            </div>
+            <div class="exercise-footer">
+                <label>Carga (kg):</label>
+                <input type="text" placeholder="0 kg" oninput="saveState()">
             </div>
         </div>
-        <div class="timer-container">
-            <div style="display: flex; justify-content: space-between; align-items: center;">
-                <span class="series-badge">Série: <span class="current-series">0</span>/4</span>
-                <span class="timer-display">00:00</span>
-            </div>
-            <div class="timer-controls">
-                <button type="button" class="btn-time active" onclick="selectTime(this, 30)">30s</button>
-                <button type="button" class="btn-time" onclick="selectTime(this, 45)">45s</button>
-                <button type="button" class="btn-time" onclick="selectTime(this, 60)">60s</button>
-                <button type="button" class="btn-start-timer" onclick="startExerciseTimer(this, 4)">⏱ Iniciar Descanso</button>
-            </div>
-        </div>
-        <div class="exercise-footer">
-            <label>Carga (kg):</label>
-            <input type="text" placeholder="0 kg" oninput="saveState()">
-        </div>
-    </div>
 
-    <!-- Leg Press Horizontal (4 séries) -->
-    <div class="exercise-item" data-total-series="4">
-        <div class="exercise-header">
-            <input type="checkbox" class="exercise-check" onchange="toggleCheck(this)">
-            <div>
-                <div class="exercise-title">Leg Press Horizontal (ou 45°)</div>
-                <div class="exercise-details">4 séries x 12 repetições</div>
-                <a href="https://www.youtube.com/results?search_query=leg+press+45+execucao+correta" target="_blank"
-                    class="btn-exec">▶ Ver Execução</a>
+        <!-- Leg Press Horizontal (4 séries) -->
+        <div class="exercise-item" data-total-series="4">
+            <div class="exercise-header">
+                <input type="checkbox" class="exercise-check" onchange="toggleCheck(this)">
+                <div>
+                    <div class="exercise-title">Leg Press Horizontal (ou 45°)</div>
+                    <div class="exercise-details">4 séries x 12 repetições</div>
+                    <a href="https://www.youtube.com/results?search_query=leg+press+45+execucao+correta" target="_blank"
+                        class="btn-exec">▶ Ver Execução</a>
+                </div>
+            </div>
+            <div class="timer-container">
+                <div style="display: flex; justify-content: space-between; align-items: center;">
+                    <span class="series-badge">Série: <span class="current-series">0</span>/4</span>
+                    <span class="timer-display">00:00</span>
+                </div>
+                <div class="timer-controls">
+                    <button type="button" class="btn-time active" onclick="selectTime(this, 30)">30s</button>
+                    <button type="button" class="btn-time" onclick="selectTime(this, 45)">45s</button>
+                    <button type="button" class="btn-time" onclick="selectTime(this, 60)">60s</button>
+                    <button type="button" class="btn-start-timer" onclick="startExerciseTimer(this, 4)">⏱ Iniciar
+                        Descanso</button>
+                </div>
+            </div>
+            <div class="exercise-footer">
+                <label>Carga (kg):</label>
+                <input type="text" placeholder="0 kg" oninput="saveState()">
             </div>
         </div>
-        <div class="timer-container">
-            <div style="display: flex; justify-content: space-between; align-items: center;">
-                <span class="series-badge">Série: <span class="current-series">0</span>/4</span>
-                <span class="timer-display">00:00</span>
-            </div>
-            <div class="timer-controls">
-                <button type="button" class="btn-time active" onclick="selectTime(this, 30)">30s</button>
-                <button type="button" class="btn-time" onclick="selectTime(this, 45)">45s</button>
-                <button type="button" class="btn-time" onclick="selectTime(this, 60)">60s</button>
-                <button type="button" class="btn-start-timer" onclick="startExerciseTimer(this, 4)">⏱ Iniciar Descanso</button>
-            </div>
-        </div>
-        <div class="exercise-footer">
-            <label>Carga (kg):</label>
-            <input type="text" placeholder="0 kg" oninput="saveState()">
-        </div>
-    </div>
 
-    <!-- Cadeira Flexora (4 séries) -->
-    <div class="exercise-item" data-total-series="4">
-        <div class="exercise-header">
-            <input type="checkbox" class="exercise-check" onchange="toggleCheck(this)">
-            <div>
-                <div class="exercise-title">Cadeira Flexora</div>
-                <div class="exercise-details">4 séries x 12 repetições</div>
-                <a href="https://www.youtube.com/results?search_query=cadeira+flexora+execucao+correta"
-                    target="_blank" class="btn-exec">▶ Ver Execução</a>
+        <!-- Cadeira Flexora (4 séries) -->
+        <div class="exercise-item" data-total-series="4">
+            <div class="exercise-header">
+                <input type="checkbox" class="exercise-check" onchange="toggleCheck(this)">
+                <div>
+                    <div class="exercise-title">Cadeira Flexora</div>
+                    <div class="exercise-details">4 séries x 12 repetições</div>
+                    <a href="https://www.youtube.com/results?search_query=cadeira+flexora+execucao+correta"
+                        target="_blank" class="btn-exec">▶ Ver Execução</a>
+                </div>
+            </div>
+            <div class="timer-container">
+                <div style="display: flex; justify-content: space-between; align-items: center;">
+                    <span class="series-badge">Série: <span class="current-series">0</span>/4</span>
+                    <span class="timer-display">00:00</span>
+                </div>
+                <div class="timer-controls">
+                    <button type="button" class="btn-time active" onclick="selectTime(this, 30)">30s</button>
+                    <button type="button" class="btn-time" onclick="selectTime(this, 45)">45s</button>
+                    <button type="button" class="btn-time" onclick="selectTime(this, 60)">60s</button>
+                    <button type="button" class="btn-start-timer" onclick="startExerciseTimer(this, 4)">⏱ Iniciar
+                        Descanso</button>
+                </div>
+            </div>
+            <div class="exercise-footer">
+                <label>Carga (kg):</label>
+                <input type="text" placeholder="0 kg" oninput="saveState()">
             </div>
         </div>
-        <div class="timer-container">
-            <div style="display: flex; justify-content: space-between; align-items: center;">
-                <span class="series-badge">Série: <span class="current-series">0</span>/4</span>
-                <span class="timer-display">00:00</span>
-            </div>
-            <div class="timer-controls">
-                <button type="button" class="btn-time active" onclick="selectTime(this, 30)">30s</button>
-                <button type="button" class="btn-time" onclick="selectTime(this, 45)">45s</button>
-                <button type="button" class="btn-time" onclick="selectTime(this, 60)">60s</button>
-                <button type="button" class="btn-start-timer" onclick="startExerciseTimer(this, 4)">⏱ Iniciar Descanso</button>
-            </div>
-        </div>
-        <div class="exercise-footer">
-            <label>Carga (kg):</label>
-            <input type="text" placeholder="0 kg" oninput="saveState()">
-        </div>
-    </div>
 
-    <!-- Elevação Pélvica (4 séries) -->
-    <div class="exercise-item" data-total-series="4">
-        <div class="exercise-header">
-            <input type="checkbox" class="exercise-check" onchange="toggleCheck(this)">
-            <div>
-                <div class="exercise-title">Elevação Pélvica na Máquina / Smith</div>
-                <div class="exercise-details">4 séries x 12 repetições</div>
-                <a href="https://www.youtube.com/results?search_query=elevacao+pelvica+smith+execucao+correta"
-                    target="_blank" class="btn-exec">▶ Ver Execução</a>
+        <!-- Elevação Pélvica (4 séries) -->
+        <div class="exercise-item" data-total-series="4">
+            <div class="exercise-header">
+                <input type="checkbox" class="exercise-check" onchange="toggleCheck(this)">
+                <div>
+                    <div class="exercise-title">Elevação Pélvica na Máquina / Smith</div>
+                    <div class="exercise-details">4 séries x 12 repetições</div>
+                    <a href="https://www.youtube.com/results?search_query=elevacao+pelvica+smith+execucao+correta"
+                        target="_blank" class="btn-exec">▶ Ver Execução</a>
+                </div>
+            </div>
+            <div class="timer-container">
+                <div style="display: flex; justify-content: space-between; align-items: center;">
+                    <span class="series-badge">Série: <span class="current-series">0</span>/4</span>
+                    <span class="timer-display">00:00</span>
+                </div>
+                <div class="timer-controls">
+                    <button type="button" class="btn-time active" onclick="selectTime(this, 30)">30s</button>
+                    <button type="button" class="btn-time" onclick="selectTime(this, 45)">45s</button>
+                    <button type="button" class="btn-time" onclick="selectTime(this, 60)">60s</button>
+                    <button type="button" class="btn-start-timer" onclick="startExerciseTimer(this, 4)">⏱ Iniciar
+                        Descanso</button>
+                </div>
+            </div>
+            <div class="exercise-footer">
+                <label>Carga (kg):</label>
+                <input type="text" placeholder="0 kg" oninput="saveState()">
             </div>
         </div>
-        <div class="timer-container">
-            <div style="display: flex; justify-content: space-between; align-items: center;">
-                <span class="series-badge">Série: <span class="current-series">0</span>/4</span>
-                <span class="timer-display">00:00</span>
-            </div>
-            <div class="timer-controls">
-                <button type="button" class="btn-time active" onclick="selectTime(this, 30)">30s</button>
-                <button type="button" class="btn-time" onclick="selectTime(this, 45)">45s</button>
-                <button type="button" class="btn-time" onclick="selectTime(this, 60)">60s</button>
-                <button type="button" class="btn-start-timer" onclick="startExerciseTimer(this, 4)">⏱ Iniciar Descanso</button>
-            </div>
-        </div>
-        <div class="exercise-footer">
-            <label>Carga (kg):</label>
-            <input type="text" placeholder="0 kg" oninput="saveState()">
-        </div>
-    </div>
 
-    <!-- Puxada Alta (3 séries) -->
-    <div class="exercise-item" data-total-series="3">
-        <div class="exercise-header">
-            <input type="checkbox" class="exercise-check" onchange="toggleCheck(this)">
-            <div>
-                <div class="exercise-title">Puxada Alta Aberta na Polia</div>
-                <div class="exercise-details">3 séries x 12 repetições</div>
-                <a href="https://www.youtube.com/results?search_query=puxada+frente+pulley+execucao+correta"
-                    target="_blank" class="btn-exec">▶ Ver Execução</a>
+        <!-- Puxada Alta (3 séries) -->
+        <div class="exercise-item" data-total-series="3">
+            <div class="exercise-header">
+                <input type="checkbox" class="exercise-check" onchange="toggleCheck(this)">
+                <div>
+                    <div class="exercise-title">Puxada Alta Aberta na Polia</div>
+                    <div class="exercise-details">3 séries x 12 repetições</div>
+                    <a href="https://www.youtube.com/results?search_query=puxada+frente+pulley+execucao+correta"
+                        target="_blank" class="btn-exec">▶ Ver Execução</a>
+                </div>
+            </div>
+            <div class="timer-container">
+                <div style="display: flex; justify-content: space-between; align-items: center;">
+                    <span class="series-badge">Série: <span class="current-series">0</span>/3</span>
+                    <span class="timer-display">00:00</span>
+                </div>
+                <div class="timer-controls">
+                    <button type="button" class="btn-time active" onclick="selectTime(this, 30)">30s</button>
+                    <button type="button" class="btn-time" onclick="selectTime(this, 45)">45s</button>
+                    <button type="button" class="btn-time" onclick="selectTime(this, 60)">60s</button>
+                    <button type="button" class="btn-start-timer" onclick="startExerciseTimer(this, 3)">⏱ Iniciar
+                        Descanso</button>
+                </div>
+            </div>
+            <div class="exercise-footer">
+                <label>Carga (kg):</label>
+                <input type="text" placeholder="0 kg" oninput="saveState()">
             </div>
         </div>
-        <div class="timer-container">
-            <div style="display: flex; justify-content: space-between; align-items: center;">
-                <span class="series-badge">Série: <span class="current-series">0</span>/3</span>
-                <span class="timer-display">00:00</span>
-            </div>
-            <div class="timer-controls">
-                <button type="button" class="btn-time active" onclick="selectTime(this, 30)">30s</button>
-                <button type="button" class="btn-time" onclick="selectTime(this, 45)">45s</button>
-                <button type="button" class="btn-time" onclick="selectTime(this, 60)">60s</button>
-                <button type="button" class="btn-start-timer" onclick="startExerciseTimer(this, 3)">⏱ Iniciar Descanso</button>
-            </div>
-        </div>
-        <div class="exercise-footer">
-            <label>Carga (kg):</label>
-            <input type="text" placeholder="0 kg" oninput="saveState()">
-        </div>
-    </div>
 
-    <!-- Abdominal (3 séries) -->
-    <div class="exercise-item" data-total-series="3">
-        <div class="exercise-header">
-            <input type="checkbox" class="exercise-check" onchange="toggleCheck(this)">
-            <div>
-                <div class="exercise-title">Abdominal Máquina / Colchonete</div>
-                <div class="exercise-details">3 séries x 15 repetições</div>
-                <a href="https://www.youtube.com/results?search_query=abdominal+infra+colchonete+execucao+correta"
-                    target="_blank" class="btn-exec">▶ Ver Execução</a>
+        <!-- Abdominal (3 séries) -->
+        <div class="exercise-item" data-total-series="3">
+            <div class="exercise-header">
+                <input type="checkbox" class="exercise-check" onchange="toggleCheck(this)">
+                <div>
+                    <div class="exercise-title">Abdominal Máquina / Colchonete</div>
+                    <div class="exercise-details">3 séries x 15 repetições</div>
+                    <a href="https://www.youtube.com/results?search_query=abdominal+infra+colchonete+execucao+correta"
+                        target="_blank" class="btn-exec">▶ Ver Execução</a>
+                </div>
+            </div>
+            <div class="timer-container">
+                <div style="display: flex; justify-content: space-between; align-items: center;">
+                    <span class="series-badge">Série: <span class="current-series">0</span>/3</span>
+                    <span class="timer-display">00:00</span>
+                </div>
+                <div class="timer-controls">
+                    <button type="button" class="btn-time active" onclick="selectTime(this, 30)">30s</button>
+                    <button type="button" class="btn-time" onclick="selectTime(this, 45)">45s</button>
+                    <button type="button" class="btn-time" onclick="selectTime(this, 60)">60s</button>
+                    <button type="button" class="btn-start-timer" onclick="startExerciseTimer(this, 3)">⏱ Iniciar
+                        Descanso</button>
+                </div>
+            </div>
+            <div class="exercise-footer">
+                <label>Obs:</label>
+                <input type="text" placeholder="Sem peso" oninput="saveState()">
             </div>
         </div>
-        <div class="timer-container">
-            <div style="display: flex; justify-content: space-between; align-items: center;">
-                <span class="series-badge">Série: <span class="current-series">0</span>/3</span>
-                <span class="timer-display">00:00</span>
-            </div>
-            <div class="timer-controls">
-                <button type="button" class="btn-time active" onclick="selectTime(this, 30)">30s</button>
-                <button type="button" class="btn-time" onclick="selectTime(this, 45)">45s</button>
-                <button type="button" class="btn-time" onclick="selectTime(this, 60)">60s</button>
-                <button type="button" class="btn-start-timer" onclick="startExerciseTimer(this, 3)">⏱ Iniciar Descanso</button>
-            </div>
-        </div>
-        <div class="exercise-footer">
-            <label>Obs:</label>
-            <input type="text" placeholder="Sem peso" oninput="saveState()">
-        </div>
-    </div>
 
-    <!-- Cárdio Final (Sem timer de série) -->
-    <div class="exercise-item">
-        <div class="exercise-header">
-            <input type="checkbox" class="exercise-check" onchange="toggleCheck(this)">
-            <div>
-                <div class="exercise-title">Cárdio Final (Esteira Inclinada / Transport)</div>
-                <div class="exercise-details">25 a 30 minutos</div>
+        <!-- Cárdio Final (Sem timer de série) -->
+        <div class="exercise-item">
+            <div class="exercise-header">
+                <input type="checkbox" class="exercise-check" onchange="toggleCheck(this)">
+                <div>
+                    <div class="exercise-title">Cárdio Final (Esteira Inclinada / Transport)</div>
+                    <div class="exercise-details">25 a 30 minutos</div>
+                </div>
+            </div>
+            <div class="exercise-footer">
+                <label>Velocidade:</label>
+                <input type="text" placeholder="5.5 km/h" oninput="saveState()">
             </div>
         </div>
-        <div class="exercise-footer">
-            <label>Velocidade:</label>
-            <input type="text" placeholder="5.5 km/h" oninput="saveState()">
-        </div>
     </div>
-</div>
 
     <!-- ABA: TREINO B -->
     <div id="treino-b" class="tab-content">
@@ -1114,6 +1120,82 @@
                 });
             }
             renderHistory();
+        }
+        // Armazena o tempo selecionado para cada exercício (padrão: 30 segundos)
+        let selectedTimes = {};
+        let activeTimers = {};
+
+        // Função para selecionar o tempo de descanso (30s, 45s, 60s)
+        function selectTime(btnElement, seconds) {
+            const container = btnElement.closest('.timer-controls');
+
+            // Remove a classe active de todos os botões daquele exercício
+            container.querySelectorAll('.btn-time').forEach(btn => btn.classList.remove('active'));
+
+            // Adiciona a classe active no botão clicado
+            btnElement.classList.add('active');
+
+            // Identifica o exercício e guarda o tempo selecionado
+            const exerciseItem = btnElement.closest('.exercise-item');
+            const exerciseId = exerciseItem.querySelector('.exercise-title').innerText;
+            selectedTimes[exerciseId] = seconds;
+        }
+
+        // Função principal do Timer e Controle de Séries
+        function startExerciseTimer(btnElement, totalSeries) {
+            const exerciseItem = btnElement.closest('.exercise-item');
+            const exerciseId = exerciseItem.querySelector('.exercise-title').innerText;
+            const currentSeriesEl = exerciseItem.querySelector('.current-series');
+            const timerDisplayEl = exerciseItem.querySelector('.timer-display');
+            const checkboxEl = exerciseItem.querySelector('.exercise-check');
+
+            let currentSeries = parseInt(currentSeriesEl.innerText) || 0;
+
+            // Se já concluiu todas as séries, não faz nada
+            if (currentSeries >= totalSeries) return;
+
+            // Incrementa a série atual
+            currentSeries++;
+            currentSeriesEl.innerText = currentSeries;
+
+            // Tempo selecionado ou padrão de 30s
+            let duration = selectedTimes[exerciseId] || 30;
+
+            // Se já houver um timer rodando nesse exercício, limpa o anterior
+            if (activeTimers[exerciseId]) {
+                clearInterval(activeTimers[exerciseId]);
+            }
+
+            // Desabilita o botão durante a contagem
+            btnElement.disabled = true;
+
+            let timer = duration;
+
+            activeTimers[exerciseId] = setInterval(() => {
+                let minutes = Math.floor(timer / 60);
+                let seconds = timer % 60;
+
+                minutes = minutes < 10 ? "0" + minutes : minutes;
+                seconds = seconds < 10 ? "0" + seconds : seconds;
+
+                timerDisplayEl.innerText = `${minutes}:${seconds}`;
+
+                if (--timer < 0) {
+                    clearInterval(activeTimers[exerciseId]);
+                    delete activeTimers[exerciseId];
+                    timerDisplayEl.innerText = "00:00";
+
+                    // Se atingiu o total de séries do exercício
+                    if (currentSeries >= totalSeries) {
+                        btnElement.innerText = "Séries Concluídas! 🎉";
+                        btnElement.disabled = true;
+                        if (checkboxEl) checkboxEl.checked = true; // Marca a checkbox automaticamente
+                    } else {
+                        btnElement.disabled = false;
+                        btnElement.innerText = "⏱ Iniciar Descanso";
+                    }
+                }
+            }, 1000);
         }
     </script>
 </body>
