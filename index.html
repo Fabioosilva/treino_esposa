@@ -987,187 +987,209 @@
     </div>
 
     <script>
-        // Objeto global para controle do tempo selecionado e timers ativos
-        let selectedTimes = {};
-        let activeTimers = {};
+        // Function para alternar entre as abas dos treinos
+function openTab(evt, tabName) {
+    var i, tabcontent, tablinks;
+    
+    // Esconde todos os conteúdos das abas
+    tabcontent = document.getElementsByClassName("tab-content");
+    for (i = 0; i < tabcontent.length; i++) {
+        tabcontent[i].style.display = "none";
+        tabcontent[i].classList.remove("active");
+    }
 
-        // 1. Função para selecionar o tempo de descanso (30s, 45s, 60s)
-        function selectTime(btnElement, seconds) {
-            const container = btnElement.closest('.timer-controls');
+    // Remove a classe "active" de todos os botões de abas
+    tablinks = document.getElementsByClassName("tab-button");
+    for (i = 0; i < tablinks.length; i++) {
+        tablinks[i].classList.remove("active");
+    }
 
-            // Remove a classe active dos outros botões desse exercício
-            container.querySelectorAll('.btn-time').forEach(btn => btn.classList.remove('active'));
+    // Exibe a aba atual e adiciona a classe "active" ao botão clicado
+    const selectedTab = document.getElementById(tabName);
+    if (selectedTab) {
+        selectedTab.style.display = "block";
+        selectedTab.classList.add("active");
+    }
+    
+    if (evt && evt.currentTarget) {
+        evt.currentTarget.classList.add("active");
+    }
+}
 
-            // Ativa o botão selecionado
-            btnElement.classList.add('active');
+// Objeto global para controle do tempo selecionado e timers ativos
+let selectedTimes = {};
+let activeTimers = {};
 
-            // Guarda a preferência de tempo para este exercício
-            const exerciseItem = btnElement.closest('.exercise-item');
-            const exerciseTitle = exerciseItem.querySelector('.exercise-title').innerText;
-            selectedTimes[exerciseTitle] = seconds;
-        }
+// 1. Seleção do tempo de descanso (30s, 45s, 60s)
+function selectTime(btnElement, seconds) {
+    const container = btnElement.closest('.timer-controls');
+    container.querySelectorAll('.btn-time').forEach(btn => btn.classList.remove('active'));
+    btnElement.classList.add('active');
+    
+    const exerciseItem = btnElement.closest('.exercise-item');
+    const exerciseTitle = exerciseItem.querySelector('.exercise-title').innerText;
+    selectedTimes[exerciseTitle] = seconds;
+}
 
-        // 2. Função principal do Timer e Controle de Séries
-        function startExerciseTimer(btnElement, totalSeries) {
-            const exerciseItem = btnElement.closest('.exercise-item');
-            const exerciseTitle = exerciseItem.querySelector('.exercise-title').innerText;
-            const currentSeriesEl = exerciseItem.querySelector('.current-series');
-            const timerDisplayEl = exerciseItem.querySelector('.timer-display');
-            const checkboxEl = exerciseItem.querySelector('.exercise-check');
+// 2. Timer e Controle de Séries
+function startExerciseTimer(btnElement, totalSeries) {
+    const exerciseItem = btnElement.closest('.exercise-item');
+    const exerciseTitle = exerciseItem.querySelector('.exercise-title').innerText;
+    const currentSeriesEl = exerciseItem.querySelector('.current-series');
+    const timerDisplayEl = exerciseItem.querySelector('.timer-display');
+    const checkboxEl = exerciseItem.querySelector('.exercise-check');
+    
+    let currentSeries = parseInt(currentSeriesEl.innerText) || 0;
 
-            let currentSeries = parseInt(currentSeriesEl.innerText) || 0;
+    if (currentSeries >= totalSeries) return;
 
-            // Se já concluiu todas as séries, não faz nada
-            if (currentSeries >= totalSeries) return;
+    currentSeries++;
+    currentSeriesEl.innerText = currentSeries;
+    saveState();
 
-            // Incrementa a série atual e salva no localStorage imediatamente
-            currentSeries++;
-            currentSeriesEl.innerText = currentSeries;
-            saveState();
+    let duration = selectedTimes[exerciseTitle] || 30;
 
-            // Tempo selecionado ou padrão de 30s
-            let duration = selectedTimes[exerciseTitle] || 30;
+    if (activeTimers[exerciseTitle]) {
+        clearInterval(activeTimers[exerciseTitle]);
+    }
 
-            // Se já houver um timer rodando nesse exercício, limpa o anterior
-            if (activeTimers[exerciseTitle]) {
-                clearInterval(activeTimers[exerciseTitle]);
-            }
+    btnElement.disabled = true;
+    let timer = duration;
+    
+    activeTimers[exerciseTitle] = setInterval(() => {
+        let minutes = Math.floor(timer / 60);
+        let seconds = timer % 60;
 
-            // Desabilita o botão durante a contagem
-            btnElement.disabled = true;
+        minutes = minutes < 10 ? "0" + minutes : minutes;
+        seconds = seconds < 10 ? "0" + seconds : seconds;
 
-            let timer = duration;
+        timerDisplayEl.innerText = `${minutes}:${seconds}`;
 
-            activeTimers[exerciseTitle] = setInterval(() => {
-                let minutes = Math.floor(timer / 60);
-                let seconds = timer % 60;
+        if (--timer < 0) {
+            clearInterval(activeTimers[exerciseTitle]);
+            delete activeTimers[exerciseTitle];
+            timerDisplayEl.innerText = "00:00";
 
-                minutes = minutes < 10 ? "0" + minutes : minutes;
-                seconds = seconds < 10 ? "0" + seconds : seconds;
-
-                timerDisplayEl.innerText = `${minutes}:${seconds}`;
-
-                if (--timer < 0) {
-                    clearInterval(activeTimers[exerciseTitle]);
-                    delete activeTimers[exerciseTitle];
-                    timerDisplayEl.innerText = "00:00";
-
-                    // Se atingiu o total de séries
-                    if (currentSeries >= totalSeries) {
-                        btnElement.innerText = "Séries Concluídas! 🎉";
-                        btnElement.disabled = true;
-                        if (checkboxEl) {
-                            checkboxEl.checked = true;
-                            saveState();
-                        }
-                    } else {
-                        btnElement.disabled = false;
-                        btnElement.innerText = "⏱ Iniciar Descanso";
-                    }
+            if (currentSeries >= totalSeries) {
+                btnElement.innerText = "Séries Concluídas! 🎉";
+                btnElement.disabled = true;
+                if (checkboxEl) {
+                    checkboxEl.checked = true;
+                    saveState();
                 }
-            }, 1000);
-        }
-
-        // 3. Função para alternar o checkbox do exercício
-        function toggleCheck(checkbox) {
-            saveState();
-        }
-
-        // 4. Salva o estado atual (cargas, checkboxes, séries e data) no localStorage
-        function saveState() {
-            const state = {
-                date: new Date().toLocaleDateString(),
-                inputs: {},
-                checkboxes: {},
-                series: {}
-            };
-
-            // Salva valores dos campos de texto (cargas e observações)
-            document.querySelectorAll('.exercise-item input[type="text"]').forEach((input, index) => {
-                state.inputs[index] = input.value;
-            });
-
-            // Salva checkboxes
-            document.querySelectorAll('.exercise-item .exercise-check').forEach((check, index) => {
-                state.checkboxes[index] = check.checked;
-            });
-
-            // Salva progresso das séries
-            document.querySelectorAll('.exercise-item[data-total-series]').forEach((item) => {
-                const title = item.querySelector('.exercise-title').innerText;
-                const currentSeries = item.querySelector('.current-series').innerText;
-                state.series[title] = currentSeries;
-            });
-
-            localStorage.setItem('workoutState', JSON.stringify(state));
-        }
-
-        // 5. Carrega os dados salvos com lógica de preservação de cargas e reset diário de treino
-        function loadState() {
-            const saved = localStorage.getItem('workoutState');
-            if (!saved) return;
-
-            const state = JSON.parse(saved);
-            const today = new Date().toLocaleDateString();
-            const isNewDay = state.date !== today;
-
-            // A) MANTÉM AS CARGAS E OBSERVAÇÕES (Sempre restaura os pesos digitados)
-            if (state.inputs) {
-                document.querySelectorAll('.exercise-item input[type="text"]').forEach((input, index) => {
-                    if (state.inputs[index] !== undefined) {
-                        input.value = state.inputs[index];
-                    }
-                });
-            }
-
-            // B) SE FOR UM NOVO DIA: Zera o progresso das séries e desmarca os checks
-            if (isNewDay) {
-                document.querySelectorAll('.exercise-item .exercise-check').forEach(check => check.checked = false);
-                document.querySelectorAll('.exercise-item[data-total-series]').forEach(item => {
-                    const currentSeriesEl = item.querySelector('.current-series');
-                    const btnElement = item.querySelector('.btn-start-timer');
-                    if (currentSeriesEl) currentSeriesEl.innerText = "0";
-                    if (btnElement) {
-                        btnElement.innerText = "⏱ Iniciar Descanso";
-                        btnElement.disabled = false;
-                    }
-                });
-                saveState(); // Atualiza a data do registro para hoje
-                return;
-            }
-
-            // C) SE FOR NO MESMO DIA: Restaura o progresso do treino
-            if (state.checkboxes) {
-                document.querySelectorAll('.exercise-item .exercise-check').forEach((check, index) => {
-                    if (state.checkboxes[index] !== undefined) {
-                        check.checked = state.checkboxes[index];
-                    }
-                });
-            }
-
-            if (state.series) {
-                document.querySelectorAll('.exercise-item[data-total-series]').forEach((item) => {
-                    const title = item.querySelector('.exercise-title').innerText;
-                    const totalSeries = parseInt(item.getAttribute('data-total-series'));
-                    const savedSeries = parseInt(state.series[title]) || 0;
-
-                    if (savedSeries > 0) {
-                        const currentSeriesEl = item.querySelector('.current-series');
-                        const btnElement = item.querySelector('.btn-start-timer');
-
-                        if (currentSeriesEl) currentSeriesEl.innerText = savedSeries;
-
-                        if (savedSeries >= totalSeries && btnElement) {
-                            btnElement.innerText = "Séries Concluídas! 🎉";
-                            btnElement.disabled = true;
-                        }
-                    }
-                });
+            } else {
+                btnElement.disabled = false;
+                btnElement.innerText = "⏱ Iniciar Descanso";
             }
         }
+    }, 1000);
+}
 
-        // Inicializa a leitura dos dados salvos assim que a página carregar
-        window.addEventListener('DOMContentLoaded', loadState);
+// 3. Alternar Checkbox
+function toggleCheck(checkbox) {
+    saveState();
+}
+
+// 4. Salvar Estado no localStorage
+function saveState() {
+    const state = {
+        date: new Date().toLocaleDateString(),
+        inputs: {},
+        checkboxes: {},
+        series: {}
+    };
+
+    document.querySelectorAll('.exercise-item input[type="text"]').forEach((input, index) => {
+        state.inputs[index] = input.value;
+    });
+
+    document.querySelectorAll('.exercise-item .exercise-check').forEach((check, index) => {
+        state.checkboxes[index] = check.checked;
+    });
+
+    document.querySelectorAll('.exercise-item[data-total-series]').forEach((item) => {
+        const title = item.querySelector('.exercise-title').innerText;
+        const currentSeries = item.querySelector('.current-series').innerText;
+        state.series[title] = currentSeries;
+    });
+
+    localStorage.setItem('workoutState', JSON.stringify(state));
+}
+
+// 5. Carregar Estado com preservação de cargas e reset diário de treino
+function loadState() {
+    const saved = localStorage.getItem('workoutState');
+    if (!saved) return;
+
+    const state = JSON.parse(saved);
+    const today = new Date().toLocaleDateString();
+    const isNewDay = state.date !== today;
+
+    // Restaura as Cargas e Observações
+    if (state.inputs) {
+        document.querySelectorAll('.exercise-item input[type="text"]').forEach((input, index) => {
+            if (state.inputs[index] !== undefined) {
+                input.value = state.inputs[index];
+            }
+        });
+    }
+
+    // Se for um NOVO DIA: Zera séries e desmarca checks
+    if (isNewDay) {
+        document.querySelectorAll('.exercise-item .exercise-check').forEach(check => check.checked = false);
+        document.querySelectorAll('.exercise-item[data-total-series]').forEach(item => {
+            const currentSeriesEl = item.querySelector('.current-series');
+            const btnElement = item.querySelector('.btn-start-timer');
+            if (currentSeriesEl) currentSeriesEl.innerText = "0";
+            if (btnElement) {
+                btnElement.innerText = "⏱ Iniciar Descanso";
+                btnElement.disabled = false;
+            }
+        });
+        saveState();
+        return;
+    }
+
+    // Se for no MESMO DIA: Restaura o progresso do treino
+    if (state.checkboxes) {
+        document.querySelectorAll('.exercise-item .exercise-check').forEach((check, index) => {
+            if (state.checkboxes[index] !== undefined) {
+                check.checked = state.checkboxes[index];
+            }
+        });
+    }
+
+    if (state.series) {
+        document.querySelectorAll('.exercise-item[data-total-series]').forEach((item) => {
+            const title = item.querySelector('.exercise-title').innerText;
+            const totalSeries = parseInt(item.getAttribute('data-total-series'));
+            const savedSeries = parseInt(state.series[title]) || 0;
+
+            if (savedSeries > 0) {
+                const currentSeriesEl = item.querySelector('.current-series');
+                const btnElement = item.querySelector('.btn-start-timer');
+
+                if (currentSeriesEl) currentSeriesEl.innerText = savedSeries;
+
+                if (savedSeries >= totalSeries && btnElement) {
+                    btnElement.innerText = "Séries Concluídas! 🎉";
+                    btnElement.disabled = true;
+                }
+            }
+        });
+    }
+}
+
+// Inicializa o estado dos treinos e garante a exibição do Treino A por padrão
+window.addEventListener('DOMContentLoaded', () => {
+    loadState();
+    
+    // Abre o Treino A por padrão se nenhuma aba estiver ativa
+    const firstTabBtn = document.querySelector('.tab-button');
+    if (firstTabBtn) {
+        firstTabBtn.click();
+    }
+});
     </script>
 </body>
 
