@@ -987,164 +987,30 @@
     </div>
 
     <script>
-        // Alternar Abas
-        function switchTab(evt, tabName) {
-            const contents = document.getElementsByClassName("tab-content");
-            for (let c of contents) {
-                c.classList.remove("active");
-            }
-
-            const buttons = document.getElementsByClassName("tab-btn");
-            for (let b of buttons) {
-                b.classList.remove("active");
-            }
-
-            document.getElementById(tabName).classList.add("active");
-            evt.currentTarget.classList.add("active");
-            window.scrollTo(0, 0);
-        }
-
-        // Marcar Exercício
-        function toggleCheck(checkbox) {
-            const item = checkbox.closest('.exercise-item');
-            if (checkbox.checked) {
-                item.classList.add("completed");
-            } else {
-                item.classList.remove("completed");
-            }
-            saveState();
-        }
-
-        // Salvar Treino
-        function saveState() {
-            const data = {};
-            document.querySelectorAll('.exercise-item').forEach((item, index) => {
-                const checkbox = item.querySelector('input[type="checkbox"]');
-                const textInput = item.querySelector('input[type="text"]');
-                data[index] = {
-                    checked: checkbox.checked,
-                    text: textInput.value
-                };
-            });
-            localStorage.setItem('treino_esposa_v2_data', JSON.stringify(data));
-        }
-
-        // Medidas
-        function addMeasurement() {
-            const peso = document.getElementById('m-peso').value;
-            const cintura = document.getElementById('m-cintura').value;
-            const quadril = document.getElementById('m-quadril').value;
-            const coxa = document.getElementById('m-coxa').value;
-
-            if (!peso && !cintura && !quadril && !coxa) {
-                alert("Preencha pelo menos um campo!");
-                return;
-            }
-
-            const date = new Date().toLocaleDateString('pt-BR');
-            const history = JSON.parse(localStorage.getItem('treino_esposa_history') || '[]');
-
-            history.unshift({ date, peso, cintura, quadril, coxa });
-            localStorage.setItem('treino_esposa_history', JSON.stringify(history));
-
-            document.getElementById('m-peso').value = '';
-            document.getElementById('m-cintura').value = '';
-            document.getElementById('m-quadril').value = '';
-            document.getElementById('m-coxa').value = '';
-
-            renderHistory();
-        }
-
-        function renderHistory() {
-            const history = JSON.parse(localStorage.getItem('treino_esposa_history') || '[]');
-            const container = document.getElementById('history-container');
-            container.innerHTML = '';
-
-            if (history.length === 0) {
-                container.innerHTML = '<p style="font-size: 0.8rem;">Nenhum registro salvo ainda.</p>';
-                return;
-            }
-
-            history.forEach(item => {
-                const div = document.createElement('div');
-                div.className = 'history-item';
-                div.innerHTML = `
-                    <span><strong>${item.date}:</strong> ${item.peso ? item.peso + 'kg' : ''}</span>
-                    <span>Cint: ${item.cintura || '-'}cm | Quad: ${item.quadril || '-'}cm</span>
-                `;
-                container.appendChild(div);
-            });
-        }
-
-        // Timer
-        let timerInterval;
-        function setTimer(seconds) {
-            clearInterval(timerInterval);
-            let timeLeft = seconds;
-            updateTimerDisplay(timeLeft);
-
-            timerInterval = setInterval(() => {
-                timeLeft--;
-                updateTimerDisplay(timeLeft);
-                if (timeLeft <= 0) {
-                    clearInterval(timerInterval);
-                    alert("⏱️ Tempo de descanso finalizado! Bora para a próxima série!");
-                }
-            }, 1000);
-        }
-
-        function stopTimer() {
-            clearInterval(timerInterval);
-            updateTimerDisplay(0);
-        }
-
-        function updateTimerDisplay(sec) {
-            const m = Math.floor(sec / 60).toString().padStart(2, '0');
-            const s = (sec % 60).toString().padStart(2, '0');
-            document.getElementById('timer-display').innerText = `${m}:${s}`;
-        }
-
-        // Carregar Dados
-        window.onload = function () {
-            const saved = localStorage.getItem('treino_esposa_v2_data');
-            if (saved) {
-                const data = JSON.parse(saved);
-                document.querySelectorAll('.exercise-item').forEach((item, index) => {
-                    if (data[index]) {
-                        const checkbox = item.querySelector('input[type="checkbox"]');
-                        const textInput = item.querySelector('input[type="text"]');
-                        checkbox.checked = data[index].checked;
-                        if (checkbox.checked) item.classList.add("completed");
-                        textInput.value = data[index].text || '';
-                    }
-                });
-            }
-            renderHistory();
-        }
-        // Armazena o tempo selecionado para cada exercício (padrão: 30 segundos)
+        // Objeto global para controle do tempo selecionado e timers ativos
         let selectedTimes = {};
         let activeTimers = {};
 
-        // Função para selecionar o tempo de descanso (30s, 45s, 60s)
+        // 1. Função para selecionar o tempo de descanso (30s, 45s, 60s)
         function selectTime(btnElement, seconds) {
             const container = btnElement.closest('.timer-controls');
 
-            // Remove a classe active de todos os botões daquele exercício
+            // Remove a classe active dos outros botões desse exercício
             container.querySelectorAll('.btn-time').forEach(btn => btn.classList.remove('active'));
 
-            // Adiciona a classe active no botão clicado
+            // Ativa o botão selecionado
             btnElement.classList.add('active');
 
-            // Identifica o exercício e guarda o tempo selecionado
+            // Guarda a preferência de tempo para este exercício
             const exerciseItem = btnElement.closest('.exercise-item');
-            const exerciseId = exerciseItem.querySelector('.exercise-title').innerText;
-            selectedTimes[exerciseId] = seconds;
+            const exerciseTitle = exerciseItem.querySelector('.exercise-title').innerText;
+            selectedTimes[exerciseTitle] = seconds;
         }
 
-        // Função principal do Timer e Controle de Séries
+        // 2. Função principal do Timer e Controle de Séries
         function startExerciseTimer(btnElement, totalSeries) {
             const exerciseItem = btnElement.closest('.exercise-item');
-            const exerciseId = exerciseItem.querySelector('.exercise-title').innerText;
+            const exerciseTitle = exerciseItem.querySelector('.exercise-title').innerText;
             const currentSeriesEl = exerciseItem.querySelector('.current-series');
             const timerDisplayEl = exerciseItem.querySelector('.timer-display');
             const checkboxEl = exerciseItem.querySelector('.exercise-check');
@@ -1154,16 +1020,17 @@
             // Se já concluiu todas as séries, não faz nada
             if (currentSeries >= totalSeries) return;
 
-            // Incrementa a série atual
+            // Incrementa a série atual e salva no localStorage imediatamente
             currentSeries++;
             currentSeriesEl.innerText = currentSeries;
+            saveState();
 
             // Tempo selecionado ou padrão de 30s
-            let duration = selectedTimes[exerciseId] || 30;
+            let duration = selectedTimes[exerciseTitle] || 30;
 
             // Se já houver um timer rodando nesse exercício, limpa o anterior
-            if (activeTimers[exerciseId]) {
-                clearInterval(activeTimers[exerciseId]);
+            if (activeTimers[exerciseTitle]) {
+                clearInterval(activeTimers[exerciseTitle]);
             }
 
             // Desabilita o botão durante a contagem
@@ -1171,7 +1038,7 @@
 
             let timer = duration;
 
-            activeTimers[exerciseId] = setInterval(() => {
+            activeTimers[exerciseTitle] = setInterval(() => {
                 let minutes = Math.floor(timer / 60);
                 let seconds = timer % 60;
 
@@ -1181,15 +1048,18 @@
                 timerDisplayEl.innerText = `${minutes}:${seconds}`;
 
                 if (--timer < 0) {
-                    clearInterval(activeTimers[exerciseId]);
-                    delete activeTimers[exerciseId];
+                    clearInterval(activeTimers[exerciseTitle]);
+                    delete activeTimers[exerciseTitle];
                     timerDisplayEl.innerText = "00:00";
 
-                    // Se atingiu o total de séries do exercício
+                    // Se atingiu o total de séries
                     if (currentSeries >= totalSeries) {
                         btnElement.innerText = "Séries Concluídas! 🎉";
                         btnElement.disabled = true;
-                        if (checkboxEl) checkboxEl.checked = true; // Marca a checkbox automaticamente
+                        if (checkboxEl) {
+                            checkboxEl.checked = true;
+                            saveState();
+                        }
                     } else {
                         btnElement.disabled = false;
                         btnElement.innerText = "⏱ Iniciar Descanso";
@@ -1197,6 +1067,107 @@
                 }
             }, 1000);
         }
+
+        // 3. Função para alternar o checkbox do exercício
+        function toggleCheck(checkbox) {
+            saveState();
+        }
+
+        // 4. Salva o estado atual (cargas, checkboxes, séries e data) no localStorage
+        function saveState() {
+            const state = {
+                date: new Date().toLocaleDateString(),
+                inputs: {},
+                checkboxes: {},
+                series: {}
+            };
+
+            // Salva valores dos campos de texto (cargas e observações)
+            document.querySelectorAll('.exercise-item input[type="text"]').forEach((input, index) => {
+                state.inputs[index] = input.value;
+            });
+
+            // Salva checkboxes
+            document.querySelectorAll('.exercise-item .exercise-check').forEach((check, index) => {
+                state.checkboxes[index] = check.checked;
+            });
+
+            // Salva progresso das séries
+            document.querySelectorAll('.exercise-item[data-total-series]').forEach((item) => {
+                const title = item.querySelector('.exercise-title').innerText;
+                const currentSeries = item.querySelector('.current-series').innerText;
+                state.series[title] = currentSeries;
+            });
+
+            localStorage.setItem('workoutState', JSON.stringify(state));
+        }
+
+        // 5. Carrega os dados salvos com lógica de preservação de cargas e reset diário de treino
+        function loadState() {
+            const saved = localStorage.getItem('workoutState');
+            if (!saved) return;
+
+            const state = JSON.parse(saved);
+            const today = new Date().toLocaleDateString();
+            const isNewDay = state.date !== today;
+
+            // A) MANTÉM AS CARGAS E OBSERVAÇÕES (Sempre restaura os pesos digitados)
+            if (state.inputs) {
+                document.querySelectorAll('.exercise-item input[type="text"]').forEach((input, index) => {
+                    if (state.inputs[index] !== undefined) {
+                        input.value = state.inputs[index];
+                    }
+                });
+            }
+
+            // B) SE FOR UM NOVO DIA: Zera o progresso das séries e desmarca os checks
+            if (isNewDay) {
+                document.querySelectorAll('.exercise-item .exercise-check').forEach(check => check.checked = false);
+                document.querySelectorAll('.exercise-item[data-total-series]').forEach(item => {
+                    const currentSeriesEl = item.querySelector('.current-series');
+                    const btnElement = item.querySelector('.btn-start-timer');
+                    if (currentSeriesEl) currentSeriesEl.innerText = "0";
+                    if (btnElement) {
+                        btnElement.innerText = "⏱ Iniciar Descanso";
+                        btnElement.disabled = false;
+                    }
+                });
+                saveState(); // Atualiza a data do registro para hoje
+                return;
+            }
+
+            // C) SE FOR NO MESMO DIA: Restaura o progresso do treino
+            if (state.checkboxes) {
+                document.querySelectorAll('.exercise-item .exercise-check').forEach((check, index) => {
+                    if (state.checkboxes[index] !== undefined) {
+                        check.checked = state.checkboxes[index];
+                    }
+                });
+            }
+
+            if (state.series) {
+                document.querySelectorAll('.exercise-item[data-total-series]').forEach((item) => {
+                    const title = item.querySelector('.exercise-title').innerText;
+                    const totalSeries = parseInt(item.getAttribute('data-total-series'));
+                    const savedSeries = parseInt(state.series[title]) || 0;
+
+                    if (savedSeries > 0) {
+                        const currentSeriesEl = item.querySelector('.current-series');
+                        const btnElement = item.querySelector('.btn-start-timer');
+
+                        if (currentSeriesEl) currentSeriesEl.innerText = savedSeries;
+
+                        if (savedSeries >= totalSeries && btnElement) {
+                            btnElement.innerText = "Séries Concluídas! 🎉";
+                            btnElement.disabled = true;
+                        }
+                    }
+                });
+            }
+        }
+
+        // Inicializa a leitura dos dados salvos assim que a página carregar
+        window.addEventListener('DOMContentLoaded', loadState);
     </script>
 </body>
 
