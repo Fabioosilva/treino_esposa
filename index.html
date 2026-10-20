@@ -1,21 +1,22 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    
-    <!-- Ícones do webapp -->
-<link rel="icon" type="image/png" sizes="32x32" href="./favicon-32.png">
-<link rel="icon" type="image/png" sizes="192x192" href="icon-192.png">
-<link rel="apple-touch-icon" href="apple-touch-icon.png">
 
-<!-- Configurações do aplicativo -->
-<link rel="manifest" href="manifest.json">
-<meta name="theme-color" content="#121212">
-<meta name="apple-mobile-web-app-capable" content="yes">
-<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-<meta name="apple-mobile-web-app-title" content="Meu Treino">
-    
+    <!-- Ícones do webapp -->
+    <link rel="icon" type="image/png" sizes="32x32" href="./favicon-32.png">
+    <link rel="icon" type="image/png" sizes="192x192" href="icon-192.png">
+    <link rel="apple-touch-icon" href="apple-touch-icon.png">
+
+    <!-- Configurações do aplicativo -->
+    <link rel="manifest" href="manifest.json">
+    <meta name="theme-color" content="#121212">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="apple-mobile-web-app-title" content="Meu Treino">
+
     <title>Plano de Treino & Saúde - Esposa</title>
     <style>
         :root {
@@ -62,7 +63,7 @@
         }
 
         /* Tabs de Navegação */
-        
+
         /* Tabs de Navegação */
         .tabs {
             display: flex;
@@ -132,7 +133,8 @@
             gap: 6px;
         }
 
-        .card p, .card li {
+        .card p,
+        .card li {
             font-size: 0.85rem;
             color: var(--text-muted);
             line-height: 1.5;
@@ -295,6 +297,7 @@
             border-radius: 8px;
             cursor: pointer;
         }
+
         /* Botão minimalista para o vídeo do YouTube */
         .btn-exec {
             display: inline-block;
@@ -314,8 +317,79 @@
             background: rgba(255, 107, 129, 0.25);
             color: #fff;
         }
+
+        /* Container do Timer e Séries */
+        .timer-container {
+            margin-top: 10px;
+            padding-top: 8px;
+            border-top: 1px dashed rgba(255, 107, 129, 0.2);
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+        }
+
+        .timer-controls {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            flex-wrap: wrap;
+        }
+
+        .btn-time {
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 107, 129, 0.3);
+            color: #fff;
+            padding: 4px 8px;
+            border-radius: 6px;
+            font-size: 0.75rem;
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+
+        .btn-time.active,
+        .btn-time:hover {
+            background: #ff6b81;
+            color: #fff;
+        }
+
+        .btn-start-timer {
+            background: #ff6b81;
+            color: #fff;
+            border: none;
+            padding: 6px 12px;
+            border-radius: 6px;
+            font-size: 0.8rem;
+            font-weight: 600;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 5px;
+        }
+
+        .btn-start-timer:disabled {
+            background: #4a3b40;
+            color: #888;
+            cursor: not-allowed;
+        }
+
+        .series-badge {
+            font-size: 0.75rem;
+            font-weight: bold;
+            color: #ff6b81;
+            background: rgba(255, 107, 129, 0.15);
+            padding: 2px 8px;
+            border-radius: 12px;
+        }
+
+        .timer-display {
+            font-family: monospace;
+            font-size: 0.9rem;
+            font-weight: bold;
+            color: #00ffcc;
+        }
     </style>
 </head>
+
 <body>
 
     <header>
@@ -357,129 +431,215 @@
     </div>
 
     <!-- ABA: TREINO A -->
-    <div id="treino-a" class="tab-content">
-        <div class="card" style="background: #251a1d; border-color: #ff6b81;">
-            <h3>Segunda-feira: Glúteos, Posteriores e Abdômen</h3>
-        </div>
+<div id="treino-a" class="tab-content">
+    <div class="card" style="background: #251a1d; border-color: #ff6b81;">
+        <h3>Segunda-feira: Glúteos, Posteriores e Abdômen</h3>
+    </div>
 
-        <div class="exercise-item">
-            <div class="exercise-header">
-                <input type="checkbox" onchange="toggleCheck(this)">
-                <div>
-                    <div class="exercise-title">Aquecimento (Esteira ou Bike)</div>
-                    <div class="exercise-details">5 a 10 min | Ritmo leve</div>
-                </div>
-            </div>
-            <div class="exercise-footer">
-                <label>Obs:</label>
-                <input type="text" placeholder="Leve" oninput="saveState()">
+    <!-- Aquecimento (Sem timer de série) -->
+    <div class="exercise-item">
+        <div class="exercise-header">
+            <input type="checkbox" class="exercise-check" onchange="toggleCheck(this)">
+            <div>
+                <div class="exercise-title">Aquecimento (Esteira ou Bike)</div>
+                <div class="exercise-details">5 a 10 min | Ritmo leve</div>
             </div>
         </div>
-
-        <div class="exercise-item">
-            <div class="exercise-header">
-                <input type="checkbox" onchange="toggleCheck(this)">
-                <div>
-                    <div class="exercise-title">Cadeira Abdutora</div>
-                    <div class="exercise-details">4 séries x 15 repetições</div>
-                    <a href="https://www.youtube.com/results?search_query=cadeira+abdutora+execucao+correta" target="_blank" class="btn-exec">▶ Ver Execução</a>
-                </div>
-            </div>
-            <div class="exercise-footer">
-                <label>Carga (kg):</label>
-                <input type="text" placeholder="0 kg" oninput="saveState()">
-            </div>
-        </div>
-
-        <div class="exercise-item">
-            <div class="exercise-header">
-                <input type="checkbox" onchange="toggleCheck(this)">
-                <div>
-                    <div class="exercise-title">Leg Press Horizontal (ou 45°)</div>
-                    <div class="exercise-details">4 séries x 12 repetições</div>
-                    <a href="https://www.youtube.com/results?search_query=leg+press+45+execucao+correta" target="_blank" class="btn-exec">▶ Ver Execução</a>
-                </div>
-            </div>
-            <div class="exercise-footer">
-                <label>Carga (kg):</label>
-                <input type="text" placeholder="0 kg" oninput="saveState()">
-            </div>
-        </div>
-
-        <div class="exercise-item">
-            <div class="exercise-header">
-                <input type="checkbox" onchange="toggleCheck(this)">
-                <div>
-                    <div class="exercise-title">Cadeira Flexora</div>
-                    <div class="exercise-details">4 séries x 12 repetições</div>
-                    <a href="https://www.youtube.com/results?search_query=cadeira+flexora+execucao+correta" target="_blank" class="btn-exec">▶ Ver Execução</a>
-                </div>
-            </div>
-            <div class="exercise-footer">
-                <label>Carga (kg):</label>
-                <input type="text" placeholder="0 kg" oninput="saveState()">
-            </div>
-        </div>
-
-        <div class="exercise-item">
-            <div class="exercise-header">
-                <input type="checkbox" onchange="toggleCheck(this)">
-                <div>
-                    <div class="exercise-title">Elevação Pélvica na Máquina / Smith</div>
-                    <div class="exercise-details">4 séries x 12 repetições</div>
-                    <a href="https://www.youtube.com/results?search_query=elevacao+pelvica+smith+execucao+correta" target="_blank" class="btn-exec">▶ Ver Execução</a>
-                </div>
-            </div>
-            <div class="exercise-footer">
-                <label>Carga (kg):</label>
-                <input type="text" placeholder="0 kg" oninput="saveState()">
-            </div>
-        </div>
-
-        <div class="exercise-item">
-            <div class="exercise-header">
-                <input type="checkbox" onchange="toggleCheck(this)">
-                <div>
-                    <div class="exercise-title">Puxada Alta Aberta na Polia</div>
-                    <div class="exercise-details">3 séries x 12 repetições</div>
-                    <a href="https://www.youtube.com/results?search_query=puxada+frente+pulley+execucao+correta" target="_blank" class="btn-exec">▶ Ver Execução</a>
-                </div>
-            </div>
-            <div class="exercise-footer">
-                <label>Carga (kg):</label>
-                <input type="text" placeholder="0 kg" oninput="saveState()">
-            </div>
-        </div>
-
-        <div class="exercise-item">
-            <div class="exercise-header">
-                <input type="checkbox" onchange="toggleCheck(this)">
-                <div>
-                    <div class="exercise-title">Abdominal Máquina / Colchonete</div>
-                    <div class="exercise-details">3 séries x 15 repetições</div>
-                    <a href="https://www.youtube.com/results?search_query=abdominal+infra+colchonete+execucao+correta" target="_blank" class="btn-exec">▶ Ver Execução</a>
-                </div>
-            </div>
-            <div class="exercise-footer">
-                <label>Obs:</label>
-                <input type="text" placeholder="Sem peso" oninput="saveState()">
-            </div>
-        </div>
-
-        <div class="exercise-item">
-            <div class="exercise-header">
-                <input type="checkbox" onchange="toggleCheck(this)">
-                <div>
-                    <div class="exercise-title">Cárdio Final (Esteira Inclinada / Transport)</div>
-                    <div class="exercise-details">25 a 30 minutos</div>
-                </div>
-            </div>
-            <div class="exercise-footer">
-                <label>Velocidade:</label>
-                <input type="text" placeholder="5.5 km/h" oninput="saveState()">
-            </div>
+        <div class="exercise-footer">
+            <label>Obs:</label>
+            <input type="text" placeholder="Leve" oninput="saveState()">
         </div>
     </div>
+
+    <!-- Cadeira Abdutora (4 séries) -->
+    <div class="exercise-item" data-total-series="4">
+        <div class="exercise-header">
+            <input type="checkbox" class="exercise-check" onchange="toggleCheck(this)">
+            <div>
+                <div class="exercise-title">Cadeira Abdutora</div>
+                <div class="exercise-details">4 séries x 15 repetições</div>
+                <a href="https://www.youtube.com/results?search_query=cadeira+abdutora+execucao+correta"
+                    target="_blank" class="btn-exec">▶ Ver Execução</a>
+            </div>
+        </div>
+        <div class="timer-container">
+            <div style="display: flex; justify-content: space-between; align-items: center;">
+                <span class="series-badge">Série: <span class="current-series">0</span>/4</span>
+                <span class="timer-display">00:00</span>
+            </div>
+            <div class="timer-controls">
+                <button type="button" class="btn-time active" onclick="selectTime(this, 30)">30s</button>
+                <button type="button" class="btn-time" onclick="selectTime(this, 45)">45s</button>
+                <button type="button" class="btn-time" onclick="selectTime(this, 60)">60s</button>
+                <button type="button" class="btn-start-timer" onclick="startExerciseTimer(this, 4)">⏱ Iniciar Descanso</button>
+            </div>
+        </div>
+        <div class="exercise-footer">
+            <label>Carga (kg):</label>
+            <input type="text" placeholder="0 kg" oninput="saveState()">
+        </div>
+    </div>
+
+    <!-- Leg Press Horizontal (4 séries) -->
+    <div class="exercise-item" data-total-series="4">
+        <div class="exercise-header">
+            <input type="checkbox" class="exercise-check" onchange="toggleCheck(this)">
+            <div>
+                <div class="exercise-title">Leg Press Horizontal (ou 45°)</div>
+                <div class="exercise-details">4 séries x 12 repetições</div>
+                <a href="https://www.youtube.com/results?search_query=leg+press+45+execucao+correta" target="_blank"
+                    class="btn-exec">▶ Ver Execução</a>
+            </div>
+        </div>
+        <div class="timer-container">
+            <div style="display: flex; justify-content: space-between; align-items: center;">
+                <span class="series-badge">Série: <span class="current-series">0</span>/4</span>
+                <span class="timer-display">00:00</span>
+            </div>
+            <div class="timer-controls">
+                <button type="button" class="btn-time active" onclick="selectTime(this, 30)">30s</button>
+                <button type="button" class="btn-time" onclick="selectTime(this, 45)">45s</button>
+                <button type="button" class="btn-time" onclick="selectTime(this, 60)">60s</button>
+                <button type="button" class="btn-start-timer" onclick="startExerciseTimer(this, 4)">⏱ Iniciar Descanso</button>
+            </div>
+        </div>
+        <div class="exercise-footer">
+            <label>Carga (kg):</label>
+            <input type="text" placeholder="0 kg" oninput="saveState()">
+        </div>
+    </div>
+
+    <!-- Cadeira Flexora (4 séries) -->
+    <div class="exercise-item" data-total-series="4">
+        <div class="exercise-header">
+            <input type="checkbox" class="exercise-check" onchange="toggleCheck(this)">
+            <div>
+                <div class="exercise-title">Cadeira Flexora</div>
+                <div class="exercise-details">4 séries x 12 repetições</div>
+                <a href="https://www.youtube.com/results?search_query=cadeira+flexora+execucao+correta"
+                    target="_blank" class="btn-exec">▶ Ver Execução</a>
+            </div>
+        </div>
+        <div class="timer-container">
+            <div style="display: flex; justify-content: space-between; align-items: center;">
+                <span class="series-badge">Série: <span class="current-series">0</span>/4</span>
+                <span class="timer-display">00:00</span>
+            </div>
+            <div class="timer-controls">
+                <button type="button" class="btn-time active" onclick="selectTime(this, 30)">30s</button>
+                <button type="button" class="btn-time" onclick="selectTime(this, 45)">45s</button>
+                <button type="button" class="btn-time" onclick="selectTime(this, 60)">60s</button>
+                <button type="button" class="btn-start-timer" onclick="startExerciseTimer(this, 4)">⏱ Iniciar Descanso</button>
+            </div>
+        </div>
+        <div class="exercise-footer">
+            <label>Carga (kg):</label>
+            <input type="text" placeholder="0 kg" oninput="saveState()">
+        </div>
+    </div>
+
+    <!-- Elevação Pélvica (4 séries) -->
+    <div class="exercise-item" data-total-series="4">
+        <div class="exercise-header">
+            <input type="checkbox" class="exercise-check" onchange="toggleCheck(this)">
+            <div>
+                <div class="exercise-title">Elevação Pélvica na Máquina / Smith</div>
+                <div class="exercise-details">4 séries x 12 repetições</div>
+                <a href="https://www.youtube.com/results?search_query=elevacao+pelvica+smith+execucao+correta"
+                    target="_blank" class="btn-exec">▶ Ver Execução</a>
+            </div>
+        </div>
+        <div class="timer-container">
+            <div style="display: flex; justify-content: space-between; align-items: center;">
+                <span class="series-badge">Série: <span class="current-series">0</span>/4</span>
+                <span class="timer-display">00:00</span>
+            </div>
+            <div class="timer-controls">
+                <button type="button" class="btn-time active" onclick="selectTime(this, 30)">30s</button>
+                <button type="button" class="btn-time" onclick="selectTime(this, 45)">45s</button>
+                <button type="button" class="btn-time" onclick="selectTime(this, 60)">60s</button>
+                <button type="button" class="btn-start-timer" onclick="startExerciseTimer(this, 4)">⏱ Iniciar Descanso</button>
+            </div>
+        </div>
+        <div class="exercise-footer">
+            <label>Carga (kg):</label>
+            <input type="text" placeholder="0 kg" oninput="saveState()">
+        </div>
+    </div>
+
+    <!-- Puxada Alta (3 séries) -->
+    <div class="exercise-item" data-total-series="3">
+        <div class="exercise-header">
+            <input type="checkbox" class="exercise-check" onchange="toggleCheck(this)">
+            <div>
+                <div class="exercise-title">Puxada Alta Aberta na Polia</div>
+                <div class="exercise-details">3 séries x 12 repetições</div>
+                <a href="https://www.youtube.com/results?search_query=puxada+frente+pulley+execucao+correta"
+                    target="_blank" class="btn-exec">▶ Ver Execução</a>
+            </div>
+        </div>
+        <div class="timer-container">
+            <div style="display: flex; justify-content: space-between; align-items: center;">
+                <span class="series-badge">Série: <span class="current-series">0</span>/3</span>
+                <span class="timer-display">00:00</span>
+            </div>
+            <div class="timer-controls">
+                <button type="button" class="btn-time active" onclick="selectTime(this, 30)">30s</button>
+                <button type="button" class="btn-time" onclick="selectTime(this, 45)">45s</button>
+                <button type="button" class="btn-time" onclick="selectTime(this, 60)">60s</button>
+                <button type="button" class="btn-start-timer" onclick="startExerciseTimer(this, 3)">⏱ Iniciar Descanso</button>
+            </div>
+        </div>
+        <div class="exercise-footer">
+            <label>Carga (kg):</label>
+            <input type="text" placeholder="0 kg" oninput="saveState()">
+        </div>
+    </div>
+
+    <!-- Abdominal (3 séries) -->
+    <div class="exercise-item" data-total-series="3">
+        <div class="exercise-header">
+            <input type="checkbox" class="exercise-check" onchange="toggleCheck(this)">
+            <div>
+                <div class="exercise-title">Abdominal Máquina / Colchonete</div>
+                <div class="exercise-details">3 séries x 15 repetições</div>
+                <a href="https://www.youtube.com/results?search_query=abdominal+infra+colchonete+execucao+correta"
+                    target="_blank" class="btn-exec">▶ Ver Execução</a>
+            </div>
+        </div>
+        <div class="timer-container">
+            <div style="display: flex; justify-content: space-between; align-items: center;">
+                <span class="series-badge">Série: <span class="current-series">0</span>/3</span>
+                <span class="timer-display">00:00</span>
+            </div>
+            <div class="timer-controls">
+                <button type="button" class="btn-time active" onclick="selectTime(this, 30)">30s</button>
+                <button type="button" class="btn-time" onclick="selectTime(this, 45)">45s</button>
+                <button type="button" class="btn-time" onclick="selectTime(this, 60)">60s</button>
+                <button type="button" class="btn-start-timer" onclick="startExerciseTimer(this, 3)">⏱ Iniciar Descanso</button>
+            </div>
+        </div>
+        <div class="exercise-footer">
+            <label>Obs:</label>
+            <input type="text" placeholder="Sem peso" oninput="saveState()">
+        </div>
+    </div>
+
+    <!-- Cárdio Final (Sem timer de série) -->
+    <div class="exercise-item">
+        <div class="exercise-header">
+            <input type="checkbox" class="exercise-check" onchange="toggleCheck(this)">
+            <div>
+                <div class="exercise-title">Cárdio Final (Esteira Inclinada / Transport)</div>
+                <div class="exercise-details">25 a 30 minutos</div>
+            </div>
+        </div>
+        <div class="exercise-footer">
+            <label>Velocidade:</label>
+            <input type="text" placeholder="5.5 km/h" oninput="saveState()">
+        </div>
+    </div>
+</div>
 
     <!-- ABA: TREINO B -->
     <div id="treino-b" class="tab-content">
@@ -507,7 +667,8 @@
                 <div>
                     <div class="exercise-title">Cadeira Extensora</div>
                     <div class="exercise-details">4 séries x 12 repetições</div>
-                    <a href="https://www.youtube.com/results?search_query=cadeira+extensora+execucao+correta" target="_blank" class="btn-exec">▶ Ver Execução</a>
+                    <a href="https://www.youtube.com/results?search_query=cadeira+extensora+execucao+correta"
+                        target="_blank" class="btn-exec">▶ Ver Execução</a>
                 </div>
             </div>
             <div class="exercise-footer">
@@ -522,7 +683,8 @@
                 <div>
                     <div class="exercise-title">Agachamento no Smith / Hack Machine</div>
                     <div class="exercise-details">4 séries x 10 repetições</div>
-                    <a href="https://www.youtube.com/results?search_query=agachamento+no+smith+execucao+correta" target="_blank" class="btn-exec">▶ Ver Execução</a>
+                    <a href="https://www.youtube.com/results?search_query=agachamento+no+smith+execucao+correta"
+                        target="_blank" class="btn-exec">▶ Ver Execução</a>
                 </div>
             </div>
             <div class="exercise-footer">
@@ -537,7 +699,8 @@
                 <div>
                     <div class="exercise-title">Glúteo na Polia (Caneleira / Alça)</div>
                     <div class="exercise-details">4 séries x 12 repetições (por perna)</div>
-                    <a href="https://www.youtube.com/results?search_query=gluteo+na+polia+caneleira+execucao+correta" target="_blank" class="btn-exec">▶ Ver Execução</a>
+                    <a href="https://www.youtube.com/results?search_query=gluteo+na+polia+caneleira+execucao+correta"
+                        target="_blank" class="btn-exec">▶ Ver Execução</a>
                 </div>
             </div>
             <div class="exercise-footer">
@@ -552,7 +715,8 @@
                 <div>
                     <div class="exercise-title">Elevação Lateral de Ombros (Halteres Leves)</div>
                     <div class="exercise-details">3 séries x 12 repetições</div>
-                    <a href="https://www.youtube.com/results?search_query=elevacao+lateral+de+ombros+execucao+correta" target="_blank" class="btn-exec">▶ Ver Execução</a>
+                    <a href="https://www.youtube.com/results?search_query=elevacao+lateral+de+ombros+execucao+correta"
+                        target="_blank" class="btn-exec">▶ Ver Execução</a>
                 </div>
             </div>
             <div class="exercise-footer">
@@ -567,7 +731,8 @@
                 <div>
                     <div class="exercise-title">Tríceps Corda na Polia</div>
                     <div class="exercise-details">3 séries x 12 repetições</div>
-                    <a href="https://www.youtube.com/results?search_query=triceps+corda+polia+execucao+correta" target="_blank" class="btn-exec">▶ Ver Execução</a>
+                    <a href="https://www.youtube.com/results?search_query=triceps+corda+polia+execucao+correta"
+                        target="_blank" class="btn-exec">▶ Ver Execução</a>
                 </div>
             </div>
             <div class="exercise-footer">
@@ -582,7 +747,8 @@
                 <div>
                     <div class="exercise-title">Prancha Abdominal</div>
                     <div class="exercise-details">3 séries x 30 a 45 segundos</div>
-                    <a href="https://www.youtube.com/results?search_query=prancha+abdominal+execucao+correta" target="_blank" class="btn-exec">▶ Ver Execução</a>
+                    <a href="https://www.youtube.com/results?search_query=prancha+abdominal+execucao+correta"
+                        target="_blank" class="btn-exec">▶ Ver Execução</a>
                 </div>
             </div>
             <div class="exercise-footer">
@@ -632,7 +798,8 @@
                 <div>
                     <div class="exercise-title">Leg Press Horizontal (Pés altos e abertos)</div>
                     <div class="exercise-details">4 séries x 12 repetições</div>
-                    <a href="https://www.youtube.com/results?search_query=leg+press+pes+altos+e+abertos+execucao+correta" target="_blank" class="btn-exec">▶ Ver Execução</a>
+                    <a href="https://www.youtube.com/results?search_query=leg+press+pes+altos+e+abertos+execucao+correta"
+                        target="_blank" class="btn-exec">▶ Ver Execução</a>
                 </div>
             </div>
             <div class="exercise-footer">
@@ -647,7 +814,8 @@
                 <div>
                     <div class="exercise-title">Cadeira Abdutora (Tronco inclinado para frente)</div>
                     <div class="exercise-details">4 séries x 15 repetições</div>
-                    <a href="https://www.youtube.com/results?search_query=cadeira+abdutora+tronco+inclinado+execucao+correta" target="_blank" class="btn-exec">▶ Ver Execução</a>
+                    <a href="https://www.youtube.com/results?search_query=cadeira+abdutora+tronco+inclinado+execucao+correta"
+                        target="_blank" class="btn-exec">▶ Ver Execução</a>
                 </div>
             </div>
             <div class="exercise-footer">
@@ -662,7 +830,8 @@
                 <div>
                     <div class="exercise-title">Cadeira Flexora</div>
                     <div class="exercise-details">3 séries x 12 repetições</div>
-                    <a href="https://www.youtube.com/results?search_query=cadeira+flexora+execucao+correta" target="_blank" class="btn-exec">▶ Ver Execução</a>
+                    <a href="https://www.youtube.com/results?search_query=cadeira+flexora+execucao+correta"
+                        target="_blank" class="btn-exec">▶ Ver Execução</a>
                 </div>
             </div>
             <div class="exercise-footer">
@@ -677,7 +846,8 @@
                 <div>
                     <div class="exercise-title">Remada Baixa na Polia</div>
                     <div class="exercise-details">3 séries x 12 repetições</div>
-                    <a href="https://www.youtube.com/results?search_query=remada+baixa+polia+execucao+correta" target="_blank" class="btn-exec">▶ Ver Execução</a>
+                    <a href="https://www.youtube.com/results?search_query=remada+baixa+polia+execucao+correta"
+                        target="_blank" class="btn-exec">▶ Ver Execução</a>
                 </div>
             </div>
             <div class="exercise-footer">
@@ -692,7 +862,8 @@
                 <div>
                     <div class="exercise-title">Abdominal Infra / Supra</div>
                     <div class="exercise-details">3 séries x 15 repetições</div>
-                    <a href="https://www.youtube.com/results?search_query=abdominal+infra+e+supra+execucao+correta" target="_blank" class="btn-exec">▶ Ver Execução</a>
+                    <a href="https://www.youtube.com/results?search_query=abdominal+infra+e+supra+execucao+correta"
+                        target="_blank" class="btn-exec">▶ Ver Execução</a>
                 </div>
             </div>
             <div class="exercise-footer">
@@ -758,10 +929,14 @@
             <h3>🥗 Dicas Nutricionais para Cintura Fina & Glúteo</h3>
             <br>
             <ul>
-                <li><strong>Proteínas em todas as refeições:</strong> Frango, ovos, peixe, carne magra, queijo cotagge ou whey. Ajudam a construir o bumbum e manter a saciedade.</li>
-                <li><strong>Hidratação Constante:</strong> Beba de 2,5 a 3 litros de água por dia. Diminui o inchaço e a retenção de líquidos na barriga.</li>
-                <li><strong>Coma Fibras:</strong> Aveia, vegetais verdes e sementes melhoram o funcionamento do intestino e diminuem a distensão abdominal.</li>
-                <li><strong>Evite Açúcares e Refrigerantes:</strong> São os maiores causadores de acúmulo de gordura localizada na cintura.</li>
+                <li><strong>Proteínas em todas as refeições:</strong> Frango, ovos, peixe, carne magra, queijo cotagge
+                    ou whey. Ajudam a construir o bumbum e manter a saciedade.</li>
+                <li><strong>Hidratação Constante:</strong> Beba de 2,5 a 3 litros de água por dia. Diminui o inchaço e a
+                    retenção de líquidos na barriga.</li>
+                <li><strong>Coma Fibras:</strong> Aveia, vegetais verdes e sementes melhoram o funcionamento do
+                    intestino e diminuem a distensão abdominal.</li>
+                <li><strong>Evite Açúcares e Refrigerantes:</strong> São os maiores causadores de acúmulo de gordura
+                    localizada na cintura.</li>
             </ul>
         </div>
     </div>
@@ -770,20 +945,25 @@
     <div id="receitas" class="tab-content">
         <div class="card">
             <h3>🍳 Crepioca Proteica</h3>
-            <p><strong>Ingredientes:</strong> 1 ovo, 1 colher (sopa) de goma de tapioca, 1 colher (sopa) de requeijão light ou frango desfiado.</p>
+            <p><strong>Ingredientes:</strong> 1 ovo, 1 colher (sopa) de goma de tapioca, 1 colher (sopa) de requeijão
+                light ou frango desfiado.</p>
             <p><strong>Preparo:</strong> Misture tudo, despeje na frigideira antiaderente e doure os dois lados.</p>
         </div>
 
         <div class="card">
             <h3>🥞 Panqueca Doce de Aveia & Banana</h3>
-            <p><strong>Ingredientes:</strong> 1 banana amassada, 1 ovo, 2 colheres (sopa) de farelo de aveia e canela a gosto.</p>
-            <p><strong>Preparo:</strong> Misture bem os ingredientes e leve à frigideira em fogo baixo. Fica incrível!</p>
+            <p><strong>Ingredientes:</strong> 1 banana amassada, 1 ovo, 2 colheres (sopa) de farelo de aveia e canela a
+                gosto.</p>
+            <p><strong>Preparo:</strong> Misture bem os ingredientes e leve à frigideira em fogo baixo. Fica incrível!
+            </p>
         </div>
 
         <div class="card">
             <h3>🥑 Mousse Fit de Proteína</h3>
-            <p><strong>Ingredientes:</strong> 1 iogurte natural desnatado + 1 scoop de whey protein (ou 2 colheres de leite em pó desnatado) + morangos picados.</p>
-            <p><strong>Preparo:</strong> Misture o iogurte com a proteína até ficar homogêneo e sirva com os morangos.</p>
+            <p><strong>Ingredientes:</strong> 1 iogurte natural desnatado + 1 scoop de whey protein (ou 2 colheres de
+                leite em pó desnatado) + morangos picados.</p>
+            <p><strong>Preparo:</strong> Misture o iogurte com a proteína até ficar homogêneo e sirva com os morangos.
+            </p>
         </div>
     </div>
 
@@ -919,7 +1099,7 @@
         }
 
         // Carregar Dados
-        window.onload = function() {
+        window.onload = function () {
             const saved = localStorage.getItem('treino_esposa_v2_data');
             if (saved) {
                 const data = JSON.parse(saved);
@@ -937,4 +1117,5 @@
         }
     </script>
 </body>
+
 </html>
