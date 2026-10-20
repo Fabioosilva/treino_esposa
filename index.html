@@ -63,8 +63,6 @@
         }
 
         /* Tabs de Navegação */
-
-        /* Tabs de Navegação */
         .tabs {
             display: flex;
             gap: 6px;
@@ -270,34 +268,6 @@
             justify-content: space-between;
         }
 
-        /* Timer */
-        .timer-box {
-            text-align: center;
-            padding: 20px 0;
-        }
-
-        .timer-display {
-            font-size: 2.5rem;
-            font-weight: bold;
-            color: var(--accent-color);
-            margin-bottom: 12px;
-        }
-
-        .timer-btn-group {
-            display: flex;
-            justify-content: center;
-            gap: 10px;
-        }
-
-        .timer-btn {
-            background: var(--card-bg);
-            border: 1px solid var(--border-color);
-            color: white;
-            padding: 8px 16px;
-            border-radius: 8px;
-            cursor: pointer;
-        }
-
         /* Botão minimalista para o vídeo do YouTube */
         .btn-exec {
             display: inline-block;
@@ -406,7 +376,6 @@
         <button class="tab-btn" onclick="switchTab(event, 'medidas')">📏 Medidas</button>
         <button class="tab-btn" onclick="switchTab(event, 'alimentacao')">🥗 Dieta</button>
         <button class="tab-btn" onclick="switchTab(event, 'receitas')">🍳 Receitas</button>
-        <button class="tab-btn" onclick="switchTab(event, 'timer')">⏱️ Timer</button>
     </div>
 
     <!-- ABA: VISÃO GERAL -->
@@ -422,7 +391,7 @@
         <div class="card">
             <h3>💡 Regras de Ouro</h3>
             <ul>
-                <li><strong>Descanso:</strong> 45 a 60 segundos entre as séries (use a aba Timer!).</li>
+                <li><strong>Descanso:</strong> 45 a 60 segundos entre as séries.</li>
                 <li><strong>Postura:</strong> Respeite a biomecânica das máquinas.</li>
                 <li><strong>Água:</strong> Mantenha uma garrafinha de 500ml sempre ao seu lado.</li>
                 <li><strong>Cárdio:</strong> 25 a 30 minutos na esteira inclinada ou transport ao final.</li>
@@ -436,7 +405,7 @@
             <h3>Segunda-feira: Glúteos, Posteriores e Abdômen</h3>
         </div>
 
-        <!-- Aquecimento (Sem timer de série) -->
+        <!-- Aquecimento -->
         <div class="exercise-item">
             <div class="exercise-header">
                 <input type="checkbox" class="exercise-check" onchange="toggleCheck(this)">
@@ -471,8 +440,7 @@
                     <button type="button" class="btn-time active" onclick="selectTime(this, 30)">30s</button>
                     <button type="button" class="btn-time" onclick="selectTime(this, 45)">45s</button>
                     <button type="button" class="btn-time" onclick="selectTime(this, 60)">60s</button>
-                    <button type="button" class="btn-start-timer" onclick="startExerciseTimer(this, 4)">⏱ Iniciar
-                        Descanso</button>
+                    <button type="button" class="btn-start-timer" onclick="startExerciseTimer(this, 4)">⏱ Iniciar Descanso</button>
                 </div>
             </div>
             <div class="exercise-footer">
@@ -501,8 +469,7 @@
                     <button type="button" class="btn-time active" onclick="selectTime(this, 30)">30s</button>
                     <button type="button" class="btn-time" onclick="selectTime(this, 45)">45s</button>
                     <button type="button" class="btn-time" onclick="selectTime(this, 60)">60s</button>
-                    <button type="button" class="btn-start-timer" onclick="startExerciseTimer(this, 4)">⏱ Iniciar
-                        Descanso</button>
+                    <button type="button" class="btn-start-timer" onclick="startExerciseTimer(this, 4)">⏱ Iniciar Descanso</button>
                 </div>
             </div>
             <div class="exercise-footer">
@@ -531,8 +498,7 @@
                     <button type="button" class="btn-time active" onclick="selectTime(this, 30)">30s</button>
                     <button type="button" class="btn-time" onclick="selectTime(this, 45)">45s</button>
                     <button type="button" class="btn-time" onclick="selectTime(this, 60)">60s</button>
-                    <button type="button" class="btn-start-timer" onclick="startExerciseTimer(this, 4)">⏱ Iniciar
-                        Descanso</button>
+                    <button type="button" class="btn-start-timer" onclick="startExerciseTimer(this, 4)">⏱ Iniciar Descanso</button>
                 </div>
             </div>
             <div class="exercise-footer">
@@ -561,8 +527,7 @@
                     <button type="button" class="btn-time active" onclick="selectTime(this, 30)">30s</button>
                     <button type="button" class="btn-time" onclick="selectTime(this, 45)">45s</button>
                     <button type="button" class="btn-time" onclick="selectTime(this, 60)">60s</button>
-                    <button type="button" class="btn-start-timer" onclick="startExerciseTimer(this, 4)">⏱ Iniciar
-                        Descanso</button>
+                    <button type="button" class="btn-start-timer" onclick="startExerciseTimer(this, 4)">⏱ Iniciar Descanso</button>
                 </div>
             </div>
             <div class="exercise-footer">
@@ -591,8 +556,7 @@
                     <button type="button" class="btn-time active" onclick="selectTime(this, 30)">30s</button>
                     <button type="button" class="btn-time" onclick="selectTime(this, 45)">45s</button>
                     <button type="button" class="btn-time" onclick="selectTime(this, 60)">60s</button>
-                    <button type="button" class="btn-start-timer" onclick="startExerciseTimer(this, 3)">⏱ Iniciar
-                        Descanso</button>
+                    <button type="button" class="btn-start-timer" onclick="startExerciseTimer(this, 3)">⏱ Iniciar Descanso</button>
                 </div>
             </div>
             <div class="exercise-footer">
@@ -621,8 +585,7 @@
                     <button type="button" class="btn-time active" onclick="selectTime(this, 30)">30s</button>
                     <button type="button" class="btn-time" onclick="selectTime(this, 45)">45s</button>
                     <button type="button" class="btn-time" onclick="selectTime(this, 60)">60s</button>
-                    <button type="button" class="btn-start-timer" onclick="startExerciseTimer(this, 3)">⏱ Iniciar
-                        Descanso</button>
+                    <button type="button" class="btn-start-timer" onclick="startExerciseTimer(this, 3)">⏱ Iniciar Descanso</button>
                 </div>
             </div>
             <div class="exercise-footer">
@@ -631,7 +594,7 @@
             </div>
         </div>
 
-        <!-- Cárdio Final (Sem timer de série) -->
+        <!-- Cárdio Final -->
         <div class="exercise-item">
             <div class="exercise-header">
                 <input type="checkbox" class="exercise-check" onchange="toggleCheck(this)">
@@ -655,7 +618,7 @@
 
         <div class="exercise-item">
             <div class="exercise-header">
-                <input type="checkbox" onchange="toggleCheck(this)">
+                <input type="checkbox" class="exercise-check" onchange="toggleCheck(this)">
                 <div>
                     <div class="exercise-title">Aquecimento (Transport ou Bike)</div>
                     <div class="exercise-details">5 a 10 min | Ritmo leve</div>
@@ -669,7 +632,7 @@
 
         <div class="exercise-item">
             <div class="exercise-header">
-                <input type="checkbox" onchange="toggleCheck(this)">
+                <input type="checkbox" class="exercise-check" onchange="toggleCheck(this)">
                 <div>
                     <div class="exercise-title">Cadeira Extensora</div>
                     <div class="exercise-details">4 séries x 12 repetições</div>
@@ -685,7 +648,7 @@
 
         <div class="exercise-item">
             <div class="exercise-header">
-                <input type="checkbox" onchange="toggleCheck(this)">
+                <input type="checkbox" class="exercise-check" onchange="toggleCheck(this)">
                 <div>
                     <div class="exercise-title">Agachamento no Smith / Hack Machine</div>
                     <div class="exercise-details">4 séries x 10 repetições</div>
@@ -701,7 +664,7 @@
 
         <div class="exercise-item">
             <div class="exercise-header">
-                <input type="checkbox" onchange="toggleCheck(this)">
+                <input type="checkbox" class="exercise-check" onchange="toggleCheck(this)">
                 <div>
                     <div class="exercise-title">Glúteo na Polia (Caneleira / Alça)</div>
                     <div class="exercise-details">4 séries x 12 repetições (por perna)</div>
@@ -717,7 +680,7 @@
 
         <div class="exercise-item">
             <div class="exercise-header">
-                <input type="checkbox" onchange="toggleCheck(this)">
+                <input type="checkbox" class="exercise-check" onchange="toggleCheck(this)">
                 <div>
                     <div class="exercise-title">Elevação Lateral de Ombros (Halteres Leves)</div>
                     <div class="exercise-details">3 séries x 12 repetições</div>
@@ -733,7 +696,7 @@
 
         <div class="exercise-item">
             <div class="exercise-header">
-                <input type="checkbox" onchange="toggleCheck(this)">
+                <input type="checkbox" class="exercise-check" onchange="toggleCheck(this)">
                 <div>
                     <div class="exercise-title">Tríceps Corda na Polia</div>
                     <div class="exercise-details">3 séries x 12 repetições</div>
@@ -749,7 +712,7 @@
 
         <div class="exercise-item">
             <div class="exercise-header">
-                <input type="checkbox" onchange="toggleCheck(this)">
+                <input type="checkbox" class="exercise-check" onchange="toggleCheck(this)">
                 <div>
                     <div class="exercise-title">Prancha Abdominal</div>
                     <div class="exercise-details">3 séries x 30 a 45 segundos</div>
@@ -765,7 +728,7 @@
 
         <div class="exercise-item">
             <div class="exercise-header">
-                <input type="checkbox" onchange="toggleCheck(this)">
+                <input type="checkbox" class="exercise-check" onchange="toggleCheck(this)">
                 <div>
                     <div class="exercise-title">Cárdio Final (Esteira ou Bike)</div>
                     <div class="exercise-details">25 a 30 minutos</div>
@@ -786,7 +749,7 @@
 
         <div class="exercise-item">
             <div class="exercise-header">
-                <input type="checkbox" onchange="toggleCheck(this)">
+                <input type="checkbox" class="exercise-check" onchange="toggleCheck(this)">
                 <div>
                     <div class="exercise-title">Aquecimento (Esteira)</div>
                     <div class="exercise-details">5 a 10 min | Ritmo leve</div>
@@ -800,7 +763,7 @@
 
         <div class="exercise-item">
             <div class="exercise-header">
-                <input type="checkbox" onchange="toggleCheck(this)">
+                <input type="checkbox" class="exercise-check" onchange="toggleCheck(this)">
                 <div>
                     <div class="exercise-title">Leg Press Horizontal (Pés altos e abertos)</div>
                     <div class="exercise-details">4 séries x 12 repetições</div>
@@ -816,7 +779,7 @@
 
         <div class="exercise-item">
             <div class="exercise-header">
-                <input type="checkbox" onchange="toggleCheck(this)">
+                <input type="checkbox" class="exercise-check" onchange="toggleCheck(this)">
                 <div>
                     <div class="exercise-title">Cadeira Abdutora (Tronco inclinado para frente)</div>
                     <div class="exercise-details">4 séries x 15 repetições</div>
@@ -832,7 +795,7 @@
 
         <div class="exercise-item">
             <div class="exercise-header">
-                <input type="checkbox" onchange="toggleCheck(this)">
+                <input type="checkbox" class="exercise-check" onchange="toggleCheck(this)">
                 <div>
                     <div class="exercise-title">Cadeira Flexora</div>
                     <div class="exercise-details">3 séries x 12 repetições</div>
@@ -848,7 +811,7 @@
 
         <div class="exercise-item">
             <div class="exercise-header">
-                <input type="checkbox" onchange="toggleCheck(this)">
+                <input type="checkbox" class="exercise-check" onchange="toggleCheck(this)">
                 <div>
                     <div class="exercise-title">Remada Baixa na Polia</div>
                     <div class="exercise-details">3 séries x 12 repetições</div>
@@ -864,7 +827,7 @@
 
         <div class="exercise-item">
             <div class="exercise-header">
-                <input type="checkbox" onchange="toggleCheck(this)">
+                <input type="checkbox" class="exercise-check" onchange="toggleCheck(this)">
                 <div>
                     <div class="exercise-title">Abdominal Infra / Supra</div>
                     <div class="exercise-details">3 séries x 15 repetições</div>
@@ -880,7 +843,7 @@
 
         <div class="exercise-item">
             <div class="exercise-header">
-                <input type="checkbox" onchange="toggleCheck(this)">
+                <input type="checkbox" class="exercise-check" onchange="toggleCheck(this)">
                 <div>
                     <div class="exercise-title">Cárdio Final (Esteira ou Transport)</div>
                     <div class="exercise-details">25 a 30 minutos</div>
@@ -935,14 +898,10 @@
             <h3>🥗 Dicas Nutricionais para Cintura Fina & Glúteo</h3>
             <br>
             <ul>
-                <li><strong>Proteínas em todas as refeições:</strong> Frango, ovos, peixe, carne magra, queijo cotagge
-                    ou whey. Ajudam a construir o bumbum e manter a saciedade.</li>
-                <li><strong>Hidratação Constante:</strong> Beba de 2,5 a 3 litros de água por dia. Diminui o inchaço e a
-                    retenção de líquidos na barriga.</li>
-                <li><strong>Coma Fibras:</strong> Aveia, vegetais verdes e sementes melhoram o funcionamento do
-                    intestino e diminuem a distensão abdominal.</li>
-                <li><strong>Evite Açúcares e Refrigerantes:</strong> São os maiores causadores de acúmulo de gordura
-                    localizada na cintura.</li>
+                <li><strong>Proteínas em todas as refeições:</strong> Frango, ovos, peixe, carne magra, queijo cotagge ou whey. Ajudam a construir o bumbum e manter a saciedade.</li>
+                <li><strong>Hidratação Constante:</strong> Beba de 2,5 a 3 litros de água por dia. Diminui o inchaço e a retenção de líquidos na barriga.</li>
+                <li><strong>Coma Fibras:</strong> Aveia, vegetais verdes e sementes melhoram o funcionamento do intestino e diminuem a distensão abdominal.</li>
+                <li><strong>Evite Açúcares e Refrigerantes:</strong> São os maiores causadores de acúmulo de gordura localizada na cintura.</li>
             </ul>
         </div>
     </div>
@@ -951,245 +910,221 @@
     <div id="receitas" class="tab-content">
         <div class="card">
             <h3>🍳 Crepioca Proteica</h3>
-            <p><strong>Ingredientes:</strong> 1 ovo, 1 colher (sopa) de goma de tapioca, 1 colher (sopa) de requeijão
-                light ou frango desfiado.</p>
+            <p><strong>Ingredientes:</strong> 1 ovo, 1 colher (sopa) de goma de tapioca, 1 colher (sopa) de requeijão light ou frango desfiado.</p>
             <p><strong>Preparo:</strong> Misture tudo, despeje na frigideira antiaderente e doure os dois lados.</p>
         </div>
 
         <div class="card">
             <h3>🥞 Panqueca Doce de Aveia & Banana</h3>
-            <p><strong>Ingredientes:</strong> 1 banana amassada, 1 ovo, 2 colheres (sopa) de farelo de aveia e canela a
-                gosto.</p>
-            <p><strong>Preparo:</strong> Misture bem os ingredientes e leve à frigideira em fogo baixo. Fica incrível!
-            </p>
+            <p><strong>Ingredientes:</strong> 1 banana amassada, 1 ovo, 2 colheres (sopa) de farelo de aveia e canela a gosto.</p>
+            <p><strong>Preparo:</strong> Misture bem os ingredientes e leve à frigideira em fogo baixo. Fica incrível!</p>
         </div>
 
         <div class="card">
             <h3>🥑 Mousse Fit de Proteína</h3>
-            <p><strong>Ingredientes:</strong> 1 iogurte natural desnatado + 1 scoop de whey protein (ou 2 colheres de
-                leite em pó desnatado) + morangos picados.</p>
-            <p><strong>Preparo:</strong> Misture o iogurte com a proteína até ficar homogêneo e sirva com os morangos.
-            </p>
-        </div>
-    </div>
-
-    <!-- ABA: TIMER -->
-    <div id="timer" class="tab-content">
-        <div class="card timer-box">
-            <h3>⏱️ Temporizador de Descanso</h3>
-            <div class="timer-display" id="timer-display">00:45</div>
-            <div class="timer-btn-group">
-                <button class="timer-btn" onclick="setTimer(45)">45 seg</button>
-                <button class="timer-btn" onclick="setTimer(60)">60 seg</button>
-                <button class="timer-btn" style="background: #ff4757;" onclick="stopTimer()">Parar</button>
-            </div>
+            <p><strong>Ingredientes:</strong> 1 iogurte natural desnatado + 1 scoop de whey protein (ou 2 colheres de leite em pó desnatado) + morangos picados.</p>
+            <p><strong>Preparo:</strong> Misture o iogurte com a proteína até ficar homogêneo e sirva com os morangos.</p>
         </div>
     </div>
 
     <script>
-        // Function para alternar entre as abas dos treinos
-function openTab(evt, tabName) {
-    var i, tabcontent, tablinks;
-    
-    // Esconde todos os conteúdos das abas
-    tabcontent = document.getElementsByClassName("tab-content");
-    for (i = 0; i < tabcontent.length; i++) {
-        tabcontent[i].style.display = "none";
-        tabcontent[i].classList.remove("active");
-    }
+        // Função para alternar entre as abas (nome unificado para 'switchTab')
+        function switchTab(evt, tabName) {
+            var i, tabcontent, tablinks;
+            
+            // Esconde todos os conteúdos das abas
+            tabcontent = document.getElementsByClassName("tab-content");
+            for (i = 0; i < tabcontent.length; i++) {
+                tabcontent[i].style.display = "none";
+                tabcontent[i].classList.remove("active");
+            }
 
-    // Remove a classe "active" de todos os botões de abas
-    tablinks = document.getElementsByClassName("tab-button");
-    for (i = 0; i < tablinks.length; i++) {
-        tablinks[i].classList.remove("active");
-    }
+            // Remove a classe "active" de todos os botões de abas
+            tablinks = document.getElementsByClassName("tab-btn");
+            for (i = 0; i < tablinks.length; i++) {
+                tablinks[i].classList.remove("active");
+            }
 
-    // Exibe a aba atual e adiciona a classe "active" ao botão clicado
-    const selectedTab = document.getElementById(tabName);
-    if (selectedTab) {
-        selectedTab.style.display = "block";
-        selectedTab.classList.add("active");
-    }
-    
-    if (evt && evt.currentTarget) {
-        evt.currentTarget.classList.add("active");
-    }
-}
-
-// Objeto global para controle do tempo selecionado e timers ativos
-let selectedTimes = {};
-let activeTimers = {};
-
-// 1. Seleção do tempo de descanso (30s, 45s, 60s)
-function selectTime(btnElement, seconds) {
-    const container = btnElement.closest('.timer-controls');
-    container.querySelectorAll('.btn-time').forEach(btn => btn.classList.remove('active'));
-    btnElement.classList.add('active');
-    
-    const exerciseItem = btnElement.closest('.exercise-item');
-    const exerciseTitle = exerciseItem.querySelector('.exercise-title').innerText;
-    selectedTimes[exerciseTitle] = seconds;
-}
-
-// 2. Timer e Controle de Séries
-function startExerciseTimer(btnElement, totalSeries) {
-    const exerciseItem = btnElement.closest('.exercise-item');
-    const exerciseTitle = exerciseItem.querySelector('.exercise-title').innerText;
-    const currentSeriesEl = exerciseItem.querySelector('.current-series');
-    const timerDisplayEl = exerciseItem.querySelector('.timer-display');
-    const checkboxEl = exerciseItem.querySelector('.exercise-check');
-    
-    let currentSeries = parseInt(currentSeriesEl.innerText) || 0;
-
-    if (currentSeries >= totalSeries) return;
-
-    currentSeries++;
-    currentSeriesEl.innerText = currentSeries;
-    saveState();
-
-    let duration = selectedTimes[exerciseTitle] || 30;
-
-    if (activeTimers[exerciseTitle]) {
-        clearInterval(activeTimers[exerciseTitle]);
-    }
-
-    btnElement.disabled = true;
-    let timer = duration;
-    
-    activeTimers[exerciseTitle] = setInterval(() => {
-        let minutes = Math.floor(timer / 60);
-        let seconds = timer % 60;
-
-        minutes = minutes < 10 ? "0" + minutes : minutes;
-        seconds = seconds < 10 ? "0" + seconds : seconds;
-
-        timerDisplayEl.innerText = `${minutes}:${seconds}`;
-
-        if (--timer < 0) {
-            clearInterval(activeTimers[exerciseTitle]);
-            delete activeTimers[exerciseTitle];
-            timerDisplayEl.innerText = "00:00";
-
-            if (currentSeries >= totalSeries) {
-                btnElement.innerText = "Séries Concluídas! 🎉";
-                btnElement.disabled = true;
-                if (checkboxEl) {
-                    checkboxEl.checked = true;
-                    saveState();
-                }
-            } else {
-                btnElement.disabled = false;
-                btnElement.innerText = "⏱ Iniciar Descanso";
+            // Exibe a aba atual e adiciona a classe "active" ao botão clicado
+            const selectedTab = document.getElementById(tabName);
+            if (selectedTab) {
+                selectedTab.style.display = "block";
+                selectedTab.classList.add("active");
+            }
+            
+            if (evt && evt.currentTarget) {
+                evt.currentTarget.classList.add("active");
             }
         }
-    }, 1000);
-}
 
-// 3. Alternar Checkbox
-function toggleCheck(checkbox) {
-    saveState();
-}
+        // Objeto global para controle do tempo selecionado e timers ativos
+        let selectedTimes = {};
+        let activeTimers = {};
 
-// 4. Salvar Estado no localStorage
-function saveState() {
-    const state = {
-        date: new Date().toLocaleDateString(),
-        inputs: {},
-        checkboxes: {},
-        series: {}
-    };
+        // 1. Seleção do tempo de descanso (30s, 45s, 60s)
+        function selectTime(btnElement, seconds) {
+            const container = btnElement.closest('.timer-controls');
+            container.querySelectorAll('.btn-time').forEach(btn => btn.classList.remove('active'));
+            btnElement.classList.add('active');
+            
+            const exerciseItem = btnElement.closest('.exercise-item');
+            const exerciseTitle = exerciseItem.querySelector('.exercise-title').innerText;
+            selectedTimes[exerciseTitle] = seconds;
+        }
 
-    document.querySelectorAll('.exercise-item input[type="text"]').forEach((input, index) => {
-        state.inputs[index] = input.value;
-    });
+        // 2. Timer e Controle de Séries
+        function startExerciseTimer(btnElement, totalSeries) {
+            const exerciseItem = btnElement.closest('.exercise-item');
+            const exerciseTitle = exerciseItem.querySelector('.exercise-title').innerText;
+            const currentSeriesEl = exerciseItem.querySelector('.current-series');
+            const timerDisplayEl = exerciseItem.querySelector('.timer-display');
+            const checkboxEl = exerciseItem.querySelector('.exercise-check');
+            
+            let currentSeries = parseInt(currentSeriesEl.innerText) || 0;
 
-    document.querySelectorAll('.exercise-item .exercise-check').forEach((check, index) => {
-        state.checkboxes[index] = check.checked;
-    });
+            if (currentSeries >= totalSeries) return;
 
-    document.querySelectorAll('.exercise-item[data-total-series]').forEach((item) => {
-        const title = item.querySelector('.exercise-title').innerText;
-        const currentSeries = item.querySelector('.current-series').innerText;
-        state.series[title] = currentSeries;
-    });
+            currentSeries++;
+            currentSeriesEl.innerText = currentSeries;
+            saveState();
 
-    localStorage.setItem('workoutState', JSON.stringify(state));
-}
+            let duration = selectedTimes[exerciseTitle] || 30;
 
-// 5. Carregar Estado com preservação de cargas e reset diário de treino
-function loadState() {
-    const saved = localStorage.getItem('workoutState');
-    if (!saved) return;
-
-    const state = JSON.parse(saved);
-    const today = new Date().toLocaleDateString();
-    const isNewDay = state.date !== today;
-
-    // Restaura as Cargas e Observações
-    if (state.inputs) {
-        document.querySelectorAll('.exercise-item input[type="text"]').forEach((input, index) => {
-            if (state.inputs[index] !== undefined) {
-                input.value = state.inputs[index];
+            if (activeTimers[exerciseTitle]) {
+                clearInterval(activeTimers[exerciseTitle]);
             }
-        });
-    }
 
-    // Se for um NOVO DIA: Zera séries e desmarca checks
-    if (isNewDay) {
-        document.querySelectorAll('.exercise-item .exercise-check').forEach(check => check.checked = false);
-        document.querySelectorAll('.exercise-item[data-total-series]').forEach(item => {
-            const currentSeriesEl = item.querySelector('.current-series');
-            const btnElement = item.querySelector('.btn-start-timer');
-            if (currentSeriesEl) currentSeriesEl.innerText = "0";
-            if (btnElement) {
-                btnElement.innerText = "⏱ Iniciar Descanso";
-                btnElement.disabled = false;
-            }
-        });
-        saveState();
-        return;
-    }
+            btnElement.disabled = true;
+            let timer = duration;
+            
+            activeTimers[exerciseTitle] = setInterval(() => {
+                let minutes = Math.floor(timer / 60);
+                let seconds = timer % 60;
 
-    // Se for no MESMO DIA: Restaura o progresso do treino
-    if (state.checkboxes) {
-        document.querySelectorAll('.exercise-item .exercise-check').forEach((check, index) => {
-            if (state.checkboxes[index] !== undefined) {
-                check.checked = state.checkboxes[index];
-            }
-        });
-    }
+                minutes = minutes < 10 ? "0" + minutes : minutes;
+                seconds = seconds < 10 ? "0" + seconds : seconds;
 
-    if (state.series) {
-        document.querySelectorAll('.exercise-item[data-total-series]').forEach((item) => {
-            const title = item.querySelector('.exercise-title').innerText;
-            const totalSeries = parseInt(item.getAttribute('data-total-series'));
-            const savedSeries = parseInt(state.series[title]) || 0;
+                timerDisplayEl.innerText = `${minutes}:${seconds}`;
 
-            if (savedSeries > 0) {
-                const currentSeriesEl = item.querySelector('.current-series');
-                const btnElement = item.querySelector('.btn-start-timer');
+                if (--timer < 0) {
+                    clearInterval(activeTimers[exerciseTitle]);
+                    delete activeTimers[exerciseTitle];
+                    timerDisplayEl.innerText = "00:00";
 
-                if (currentSeriesEl) currentSeriesEl.innerText = savedSeries;
-
-                if (savedSeries >= totalSeries && btnElement) {
-                    btnElement.innerText = "Séries Concluídas! 🎉";
-                    btnElement.disabled = true;
+                    if (currentSeries >= totalSeries) {
+                        btnElement.innerText = "Séries Concluídas! 🎉";
+                        btnElement.disabled = true;
+                        if (checkboxEl) {
+                            checkboxEl.checked = true;
+                            saveState();
+                        }
+                    } else {
+                        btnElement.disabled = false;
+                        btnElement.innerText = "⏱ Iniciar Descanso";
+                    }
                 }
-            }
-        });
-    }
-}
+            }, 1000);
+        }
 
-// Inicializa o estado dos treinos e garante a exibição do Treino A por padrão
-window.addEventListener('DOMContentLoaded', () => {
-    loadState();
-    
-    // Abre o Treino A por padrão se nenhuma aba estiver ativa
-    const firstTabBtn = document.querySelector('.tab-button');
-    if (firstTabBtn) {
-        firstTabBtn.click();
-    }
-});
+        // 3. Alternar Checkbox
+        function toggleCheck(checkbox) {
+            saveState();
+        }
+
+        // 4. Salvar Estado no localStorage
+        function saveState() {
+            const state = {
+                date: new Date().toLocaleDateString(),
+                inputs: {},
+                checkboxes: {},
+                series: {}
+            };
+
+            document.querySelectorAll('.exercise-item input[type="text"]').forEach((input, index) => {
+                state.inputs[index] = input.value;
+            });
+
+            document.querySelectorAll('.exercise-item .exercise-check').forEach((check, index) => {
+                state.checkboxes[index] = check.checked;
+            });
+
+            document.querySelectorAll('.exercise-item[data-total-series]').forEach((item) => {
+                const title = item.querySelector('.exercise-title').innerText;
+                const currentSeries = item.querySelector('.current-series').innerText;
+                state.series[title] = currentSeries;
+            });
+
+            localStorage.setItem('workoutState', JSON.stringify(state));
+        }
+
+        // 5. Carregar Estado com preservação de cargas e reset diário de treino
+        function loadState() {
+            const saved = localStorage.getItem('workoutState');
+            if (!saved) return;
+
+            const state = JSON.parse(saved);
+            const today = new Date().toLocaleDateString();
+            const isNewDay = state.date !== today;
+
+            // Restaura as Cargas e Observações
+            if (state.inputs) {
+                document.querySelectorAll('.exercise-item input[type="text"]').forEach((input, index) => {
+                    if (state.inputs[index] !== undefined) {
+                        input.value = state.inputs[index];
+                    }
+                });
+            }
+
+            // Se for um NOVO DIA: Zera séries e desmarca checks
+            if (isNewDay) {
+                document.querySelectorAll('.exercise-item .exercise-check').forEach(check => check.checked = false);
+                document.querySelectorAll('.exercise-item[data-total-series]').forEach(item => {
+                    const currentSeriesEl = item.querySelector('.current-series');
+                    const btnElement = item.querySelector('.btn-start-timer');
+                    if (currentSeriesEl) currentSeriesEl.innerText = "0";
+                    if (btnElement) {
+                        btnElement.innerText = "⏱ Iniciar Descanso";
+                        btnElement.disabled = false;
+                    }
+                });
+                saveState();
+                return;
+            }
+
+            // Se for no MESMO DIA: Restaura o progresso do treino
+            if (state.checkboxes) {
+                document.querySelectorAll('.exercise-item .exercise-check').forEach((check, index) => {
+                    if (state.checkboxes[index] !== undefined) {
+                        check.checked = state.checkboxes[index];
+                    }
+                });
+            }
+
+            if (state.series) {
+                document.querySelectorAll('.exercise-item[data-total-series]').forEach((item) => {
+                    const title = item.querySelector('.exercise-title').innerText;
+                    const totalSeries = parseInt(item.getAttribute('data-total-series'));
+                    const savedSeries = parseInt(state.series[title]) || 0;
+
+                    if (savedSeries > 0) {
+                        const currentSeriesEl = item.querySelector('.current-series');
+                        const btnElement = item.querySelector('.btn-start-timer');
+
+                        if (currentSeriesEl) currentSeriesEl.innerText = savedSeries;
+
+                        if (savedSeries >= totalSeries && btnElement) {
+                            btnElement.innerText = "Séries Concluídas! 🎉";
+                            btnElement.disabled = true;
+                        }
+                    }
+                });
+            }
+        }
+
+        // Inicializa o estado ao carregar a página
+        window.addEventListener('DOMContentLoaded', () => {
+            loadState();
+        });
     </script>
 </body>
 
