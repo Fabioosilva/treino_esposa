@@ -210,23 +210,29 @@
             text-decoration: line-through;
         }
 
-        /* Formulário de Medidas */
+        /* Formulário de Medidas (Corrigido para não estourar no celular) */
         .measure-grid {
             display: grid;
-            grid-template-columns: 1fr 1fr;
+            grid-template-columns: repeat(2, 1fr);
             gap: 10px;
             margin-bottom: 12px;
+            width: 100%;
         }
 
         .measure-field {
             display: flex;
             flex-direction: column;
             gap: 4px;
+            min-width: 0;
+            /* Impede que o conteúdo empurre e estoure a coluna */
         }
 
         .measure-field label {
             font-size: 0.8rem;
             color: var(--text-muted);
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
         }
 
         .measure-field input {
@@ -236,6 +242,9 @@
             padding: 8px;
             border-radius: 8px;
             font-size: 0.85rem;
+            width: 100%;
+            /* Força o input a respeitar a largura da coluna */
+            box-sizing: border-box;
         }
 
         .btn-action {
@@ -440,7 +449,8 @@
                     <button type="button" class="btn-time active" onclick="selectTime(this, 30)">30s</button>
                     <button type="button" class="btn-time" onclick="selectTime(this, 45)">45s</button>
                     <button type="button" class="btn-time" onclick="selectTime(this, 60)">60s</button>
-                    <button type="button" class="btn-start-timer" onclick="startExerciseTimer(this, 4)">⏱ Iniciar Descanso</button>
+                    <button type="button" class="btn-start-timer" onclick="startExerciseTimer(this, 4)">⏱ Iniciar
+                        Descanso</button>
                 </div>
             </div>
             <div class="exercise-footer">
@@ -469,7 +479,8 @@
                     <button type="button" class="btn-time active" onclick="selectTime(this, 30)">30s</button>
                     <button type="button" class="btn-time" onclick="selectTime(this, 45)">45s</button>
                     <button type="button" class="btn-time" onclick="selectTime(this, 60)">60s</button>
-                    <button type="button" class="btn-start-timer" onclick="startExerciseTimer(this, 4)">⏱ Iniciar Descanso</button>
+                    <button type="button" class="btn-start-timer" onclick="startExerciseTimer(this, 4)">⏱ Iniciar
+                        Descanso</button>
                 </div>
             </div>
             <div class="exercise-footer">
@@ -498,7 +509,8 @@
                     <button type="button" class="btn-time active" onclick="selectTime(this, 30)">30s</button>
                     <button type="button" class="btn-time" onclick="selectTime(this, 45)">45s</button>
                     <button type="button" class="btn-time" onclick="selectTime(this, 60)">60s</button>
-                    <button type="button" class="btn-start-timer" onclick="startExerciseTimer(this, 4)">⏱ Iniciar Descanso</button>
+                    <button type="button" class="btn-start-timer" onclick="startExerciseTimer(this, 4)">⏱ Iniciar
+                        Descanso</button>
                 </div>
             </div>
             <div class="exercise-footer">
@@ -527,7 +539,8 @@
                     <button type="button" class="btn-time active" onclick="selectTime(this, 30)">30s</button>
                     <button type="button" class="btn-time" onclick="selectTime(this, 45)">45s</button>
                     <button type="button" class="btn-time" onclick="selectTime(this, 60)">60s</button>
-                    <button type="button" class="btn-start-timer" onclick="startExerciseTimer(this, 4)">⏱ Iniciar Descanso</button>
+                    <button type="button" class="btn-start-timer" onclick="startExerciseTimer(this, 4)">⏱ Iniciar
+                        Descanso</button>
                 </div>
             </div>
             <div class="exercise-footer">
@@ -556,7 +569,8 @@
                     <button type="button" class="btn-time active" onclick="selectTime(this, 30)">30s</button>
                     <button type="button" class="btn-time" onclick="selectTime(this, 45)">45s</button>
                     <button type="button" class="btn-time" onclick="selectTime(this, 60)">60s</button>
-                    <button type="button" class="btn-start-timer" onclick="startExerciseTimer(this, 3)">⏱ Iniciar Descanso</button>
+                    <button type="button" class="btn-start-timer" onclick="startExerciseTimer(this, 3)">⏱ Iniciar
+                        Descanso</button>
                 </div>
             </div>
             <div class="exercise-footer">
@@ -585,7 +599,8 @@
                     <button type="button" class="btn-time active" onclick="selectTime(this, 30)">30s</button>
                     <button type="button" class="btn-time" onclick="selectTime(this, 45)">45s</button>
                     <button type="button" class="btn-time" onclick="selectTime(this, 60)">60s</button>
-                    <button type="button" class="btn-start-timer" onclick="startExerciseTimer(this, 3)">⏱ Iniciar Descanso</button>
+                    <button type="button" class="btn-start-timer" onclick="startExerciseTimer(this, 3)">⏱ Iniciar
+                        Descanso</button>
                 </div>
             </div>
             <div class="exercise-footer">
@@ -651,7 +666,8 @@
                     <button type="button" class="btn-time active" onclick="selectTime(this, 30)">30s</button>
                     <button type="button" class="btn-time" onclick="selectTime(this, 45)">45s</button>
                     <button type="button" class="btn-time" onclick="selectTime(this, 60)">60s</button>
-                    <button type="button" class="btn-start-timer" onclick="startExerciseTimer(this, 4)">⏱ Iniciar Descanso</button>
+                    <button type="button" class="btn-start-timer" onclick="startExerciseTimer(this, 4)">⏱ Iniciar
+                        Descanso</button>
                 </div>
             </div>
             <div class="exercise-footer">
@@ -680,7 +696,8 @@
                     <button type="button" class="btn-time active" onclick="selectTime(this, 30)">30s</button>
                     <button type="button" class="btn-time" onclick="selectTime(this, 45)">45s</button>
                     <button type="button" class="btn-time" onclick="selectTime(this, 60)">60s</button>
-                    <button type="button" class="btn-start-timer" onclick="startExerciseTimer(this, 4)">⏱ Iniciar Descanso</button>
+                    <button type="button" class="btn-start-timer" onclick="startExerciseTimer(this, 4)">⏱ Iniciar
+                        Descanso</button>
                 </div>
             </div>
             <div class="exercise-footer">
@@ -709,7 +726,8 @@
                     <button type="button" class="btn-time active" onclick="selectTime(this, 30)">30s</button>
                     <button type="button" class="btn-time" onclick="selectTime(this, 45)">45s</button>
                     <button type="button" class="btn-time" onclick="selectTime(this, 60)">60s</button>
-                    <button type="button" class="btn-start-timer" onclick="startExerciseTimer(this, 4)">⏱ Iniciar Descanso</button>
+                    <button type="button" class="btn-start-timer" onclick="startExerciseTimer(this, 4)">⏱ Iniciar
+                        Descanso</button>
                 </div>
             </div>
             <div class="exercise-footer">
@@ -738,7 +756,8 @@
                     <button type="button" class="btn-time active" onclick="selectTime(this, 30)">30s</button>
                     <button type="button" class="btn-time" onclick="selectTime(this, 45)">45s</button>
                     <button type="button" class="btn-time" onclick="selectTime(this, 60)">60s</button>
-                    <button type="button" class="btn-start-timer" onclick="startExerciseTimer(this, 3)">⏱ Iniciar Descanso</button>
+                    <button type="button" class="btn-start-timer" onclick="startExerciseTimer(this, 3)">⏱ Iniciar
+                        Descanso</button>
                 </div>
             </div>
             <div class="exercise-footer">
@@ -767,7 +786,8 @@
                     <button type="button" class="btn-time active" onclick="selectTime(this, 30)">30s</button>
                     <button type="button" class="btn-time" onclick="selectTime(this, 45)">45s</button>
                     <button type="button" class="btn-time" onclick="selectTime(this, 60)">60s</button>
-                    <button type="button" class="btn-start-timer" onclick="startExerciseTimer(this, 3)">⏱ Iniciar Descanso</button>
+                    <button type="button" class="btn-start-timer" onclick="startExerciseTimer(this, 3)">⏱ Iniciar
+                        Descanso</button>
                 </div>
             </div>
             <div class="exercise-footer">
@@ -796,7 +816,8 @@
                     <button type="button" class="btn-time active" onclick="selectTime(this, 30)">30s</button>
                     <button type="button" class="btn-time" onclick="selectTime(this, 45)">45s</button>
                     <button type="button" class="btn-time" onclick="selectTime(this, 60)">60s</button>
-                    <button type="button" class="btn-start-timer" onclick="startExerciseTimer(this, 3)">⏱ Iniciar Descanso</button>
+                    <button type="button" class="btn-start-timer" onclick="startExerciseTimer(this, 3)">⏱ Iniciar
+                        Descanso</button>
                 </div>
             </div>
             <div class="exercise-footer">
@@ -860,7 +881,8 @@
                     <button type="button" class="btn-time active" onclick="selectTime(this, 30)">30s</button>
                     <button type="button" class="btn-time" onclick="selectTime(this, 45)">45s</button>
                     <button type="button" class="btn-time" onclick="selectTime(this, 60)">60s</button>
-                    <button type="button" class="btn-start-timer" onclick="startExerciseTimer(this, 4)">⏱ Iniciar Descanso</button>
+                    <button type="button" class="btn-start-timer" onclick="startExerciseTimer(this, 4)">⏱ Iniciar
+                        Descanso</button>
                 </div>
             </div>
             <div class="exercise-footer">
@@ -888,7 +910,8 @@
                     <button type="button" class="btn-time active" onclick="selectTime(this, 30)">30s</button>
                     <button type="button" class="btn-time" onclick="selectTime(this, 45)">45s</button>
                     <button type="button" class="btn-time" onclick="selectTime(this, 60)">60s</button>
-                    <button type="button" class="btn-start-timer" onclick="startExerciseTimer(this, 4)">⏱ Iniciar Descanso</button>
+                    <button type="button" class="btn-start-timer" onclick="startExerciseTimer(this, 4)">⏱ Iniciar
+                        Descanso</button>
                 </div>
             </div>
             <div class="exercise-footer">
@@ -916,7 +939,8 @@
                     <button type="button" class="btn-time active" onclick="selectTime(this, 30)">30s</button>
                     <button type="button" class="btn-time" onclick="selectTime(this, 45)">45s</button>
                     <button type="button" class="btn-time" onclick="selectTime(this, 60)">60s</button>
-                    <button type="button" class="btn-start-timer" onclick="startExerciseTimer(this, 3)">⏱ Iniciar Descanso</button>
+                    <button type="button" class="btn-start-timer" onclick="startExerciseTimer(this, 3)">⏱ Iniciar
+                        Descanso</button>
                 </div>
             </div>
             <div class="exercise-footer">
@@ -944,7 +968,8 @@
                     <button type="button" class="btn-time active" onclick="selectTime(this, 30)">30s</button>
                     <button type="button" class="btn-time" onclick="selectTime(this, 45)">45s</button>
                     <button type="button" class="btn-time" onclick="selectTime(this, 60)">60s</button>
-                    <button type="button" class="btn-start-timer" onclick="startExerciseTimer(this, 3)">⏱ Iniciar Descanso</button>
+                    <button type="button" class="btn-start-timer" onclick="startExerciseTimer(this, 3)">⏱ Iniciar
+                        Descanso</button>
                 </div>
             </div>
             <div class="exercise-footer">
@@ -972,7 +997,8 @@
                     <button type="button" class="btn-time active" onclick="selectTime(this, 30)">30s</button>
                     <button type="button" class="btn-time" onclick="selectTime(this, 45)">45s</button>
                     <button type="button" class="btn-time" onclick="selectTime(this, 60)">60s</button>
-                    <button type="button" class="btn-start-timer" onclick="startExerciseTimer(this, 3)">⏱ Iniciar Descanso</button>
+                    <button type="button" class="btn-start-timer" onclick="startExerciseTimer(this, 3)">⏱ Iniciar
+                        Descanso</button>
                 </div>
             </div>
             <div class="exercise-footer">
@@ -1038,10 +1064,14 @@
             <h3>🥗 Dicas Nutricionais para Cintura Fina & Glúteo</h3>
             <br>
             <ul>
-                <li><strong>Proteínas em todas as refeições:</strong> Frango, ovos, peixe, carne magra, queijo cotagge ou whey. Ajudam a construir o bumbum e manter a saciedade.</li>
-                <li><strong>Hidratação Constante:</strong> Beba de 2,5 a 3 litros de água por dia. Diminui o inchaço e a retenção de líquidos na barriga.</li>
-                <li><strong>Coma Fibras:</strong> Aveia, vegetais verdes e sementes melhoram o funcionamento do intestino e diminuem a distensão abdominal.</li>
-                <li><strong>Evite Açúcares e Refrigerantes:</strong> São os maiores causadores de acúmulo de gordura localizada na cintura.</li>
+                <li><strong>Proteínas em todas as refeições:</strong> Frango, ovos, peixe, carne magra, queijo cotagge
+                    ou whey. Ajudam a construir o bumbum e manter a saciedade.</li>
+                <li><strong>Hidratação Constante:</strong> Beba de 2,5 a 3 litros de água por dia. Diminui o inchaço e a
+                    retenção de líquidos na barriga.</li>
+                <li><strong>Coma Fibras:</strong> Aveia, vegetais verdes e sementes melhoram o funcionamento do
+                    intestino e diminuem a distensão abdominal.</li>
+                <li><strong>Evite Açúcares e Refrigerantes:</strong> São os maiores causadores de acúmulo de gordura
+                    localizada na cintura.</li>
             </ul>
         </div>
     </div>
@@ -1050,20 +1080,25 @@
     <div id="receitas" class="tab-content">
         <div class="card">
             <h3>🍳 Crepioca Proteica</h3>
-            <p><strong>Ingredientes:</strong> 1 ovo, 1 colher (sopa) de goma de tapioca, 1 colher (sopa) de requeijão light ou frango desfiado.</p>
+            <p><strong>Ingredientes:</strong> 1 ovo, 1 colher (sopa) de goma de tapioca, 1 colher (sopa) de requeijão
+                light ou frango desfiado.</p>
             <p><strong>Preparo:</strong> Misture tudo, despeje na frigideira antiaderente e doure os dois lados.</p>
         </div>
 
         <div class="card">
             <h3>🥞 Panqueca Doce de Aveia & Banana</h3>
-            <p><strong>Ingredientes:</strong> 1 banana amassada, 1 ovo, 2 colheres (sopa) de farelo de aveia e canela a gosto.</p>
-            <p><strong>Preparo:</strong> Misture bem os ingredientes e leve à frigideira em fogo baixo. Fica incrível!</p>
+            <p><strong>Ingredientes:</strong> 1 banana amassada, 1 ovo, 2 colheres (sopa) de farelo de aveia e canela a
+                gosto.</p>
+            <p><strong>Preparo:</strong> Misture bem os ingredientes e leve à frigideira em fogo baixo. Fica incrível!
+            </p>
         </div>
 
         <div class="card">
             <h3>🥑 Mousse Fit de Proteína</h3>
-            <p><strong>Ingredientes:</strong> 1 iogurte natural desnatado + 1 scoop de whey protein (ou 2 colheres de leite em pó desnatado) + morangos picados.</p>
-            <p><strong>Preparo:</strong> Misture o iogurte com a proteína até ficar homogêneo e sirva com os morangos.</p>
+            <p><strong>Ingredientes:</strong> 1 iogurte natural desnatado + 1 scoop de whey protein (ou 2 colheres de
+                leite em pó desnatado) + morangos picados.</p>
+            <p><strong>Preparo:</strong> Misture o iogurte com a proteína até ficar homogêneo e sirva com os morangos.
+            </p>
         </div>
     </div>
 
@@ -1071,7 +1106,7 @@
         // Função para alternar entre as abas
         function switchTab(evt, tabName) {
             var i, tabcontent, tablinks;
-            
+
             tabcontent = document.getElementsByClassName("tab-content");
             for (i = 0; i < tabcontent.length; i++) {
                 tabcontent[i].style.display = "none";
@@ -1088,7 +1123,7 @@
                 selectedTab.style.display = "block";
                 selectedTab.classList.add("active");
             }
-            
+
             if (evt && evt.currentTarget) {
                 evt.currentTarget.classList.add("active");
             }
@@ -1101,7 +1136,7 @@
             const container = btnElement.closest('.timer-controls');
             container.querySelectorAll('.btn-time').forEach(btn => btn.classList.remove('active'));
             btnElement.classList.add('active');
-            
+
             const exerciseItem = btnElement.closest('.exercise-item');
             const exerciseTitle = exerciseItem.querySelector('.exercise-title').innerText;
             selectedTimes[exerciseTitle] = seconds;
@@ -1113,7 +1148,7 @@
             const currentSeriesEl = exerciseItem.querySelector('.current-series');
             const timerDisplayEl = exerciseItem.querySelector('.timer-display');
             const checkboxEl = exerciseItem.querySelector('.exercise-check');
-            
+
             let currentSeries = parseInt(currentSeriesEl.innerText) || 0;
 
             if (currentSeries >= totalSeries) return;
@@ -1130,7 +1165,7 @@
 
             btnElement.disabled = true;
             let timer = duration;
-            
+
             activeTimers[exerciseTitle] = setInterval(() => {
                 let minutes = Math.floor(timer / 60);
                 let seconds = timer % 60;
@@ -1189,7 +1224,7 @@
             localStorage.setItem('measurementsHistory', JSON.stringify(measurements));
 
             renderMeasurements();
-            
+
             // Limpa os campos
             document.getElementById('m-peso').value = '';
             document.getElementById('m-cintura').value = '';
